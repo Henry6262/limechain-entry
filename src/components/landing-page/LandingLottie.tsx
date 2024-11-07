@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Lottie from 'react-lottie';
-import * as animationData from '../../../../public/lottie/lottie-landing.json';
+import * as animationData from '../../../public/lottie/lottie-landing.json';
 
 const LottieAnimation = () => {
     const defaultOptions = {
