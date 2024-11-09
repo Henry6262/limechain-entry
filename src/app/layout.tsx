@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -29,9 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-          <Wrapper>
-            {children}
-          </Wrapper>
+        <Wrapper>
+          {children}
+        </Wrapper>
+        <Toaster />
       </body>
     </html>
   );

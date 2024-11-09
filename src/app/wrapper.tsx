@@ -8,22 +8,26 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { RainbowKitSiweNextAuthProvider } from '@rainbow-me/rainbowkit-siwe-next-auth';
 import { config } from '../config/wagmi';
 import '@rainbow-me/rainbowkit/styles.css';
-import { BlockchainProvider } from '@/context/BlockchainContext';
 
-const queryClient = new QueryClient();
+// Configure the QueryClient with refetchOnWindowFocus set to false
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // Disable automatic refetching on window focus
+    },
+  },
+});
 
 const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <SessionProvider refetchInterval={0}>
-      <WagmiProvider config={config}>
+    <SessionProvider refetchOnWindowFocus={false}>
+      <WagmiProvider config={config} >
         <QueryClientProvider client={queryClient}>
-        <BlockchainProvider>
           <RainbowKitSiweNextAuthProvider>
             <RainbowKitProvider>
               {children}
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
-          </BlockchainProvider>
         </QueryClientProvider>
       </WagmiProvider>
     </SessionProvider>

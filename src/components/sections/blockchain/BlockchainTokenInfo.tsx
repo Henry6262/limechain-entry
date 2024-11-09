@@ -1,61 +1,74 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
-import Lottie from 'react-lottie'
-import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import useDebounce from '@/hooks/useDebounce'
-import { motion, AnimatePresence } from 'framer-motion'
-import { supportedChains } from '@/lib/tokenAssetData'
-import { useTokenData } from '@/lib/fetchTokenData'
-import tokenAnimation from '../../../../public/lottie/token.json' // Import the Lottie animation
+import { useState, useMemo, useEffect } from 'react';
+import Lottie from 'react-lottie';
+import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { motion, AnimatePresence } from 'framer-motion';
+import { supportedChains } from '@/lib/helpers/tokenAssetData';
+import tokenAnimation from '../../../../public/lottie/token.json';
+import { completeQuest } from '@/utils/questCompletionHandler';
+import { addActivity } from '@/utils/userActivityHandler';
+import { useTokenData } from '@/lib/fetchTokenData';
 
 export default function TokenInfo() {
-  const [tokenAddress, setTokenAddress] = useState('')
-  const [selectedChain, setSelectedChain] = useState(supportedChains[0])
-  const debouncedTokenAddress = useDebounce(tokenAddress, 500)
+  const [tokenAddress, setTokenAddress] = useState('');
+  const [selectedChain, setSelectedChain] = useState(supportedChains[0]);
+  const [hasProcessedData, setHasProcessedData] = useState(false);
 
-  const {
-    tokenData,
-    tokenError,
-    tokenLoading,
-    balanceData,
-    balanceError,
-    balanceLoading,
-  } = useTokenData({
-    tokenAddress: debouncedTokenAddress?.match(/^0x[a-fA-F0-9]{40}$/) ? `0x${debouncedTokenAddress.slice(2)}` : 'native',
+  const { tokenData, tokenError, tokenLoading, balanceData, balanceError, balanceLoading } = useTokenData({
+    tokenAddress,
     chainId: selectedChain.id,
-  })
+  });
 
   useEffect(() => {
-    if (tokenData) {
-      console.log('Token Data:', tokenData)
+    if (tokenAddress && !hasProcessedData) {
+      // Log the token check activity
+      addActivity({
+        type: 'fetch token',
+        action: 'search',
+        datetime: new Date().toISOString(),
+        details: tokenData?.symbol || '',
+      });
+
+      // Complete the "Use Token Checker" quest
+      completeQuest(2);
+
+      // Mark data as processed
+      setHasProcessedData(true);
     }
-  }, [tokenData])
+  }, [tokenAddress, hasProcessedData, tokenData]);
 
   const displayBalance = useMemo(() => {
-    if (balanceLoading) return 'Loading...'
-    if (balanceError) return 'Error fetching balance'
-    return balanceData?.formatted || 'N/A'
-  }, [balanceData, balanceError, balanceLoading])
+    if (balanceLoading) return 'Loading...';
+    if (balanceError) return 'Error fetching balance';
+    return balanceData?.formatted || 'N/A';
+  }, [balanceData, balanceError, balanceLoading]);
 
   const handleChainChange = (chain: typeof supportedChains[0]) => {
-    setSelectedChain(chain)
-    setTokenAddress('')
-  }
+    setSelectedChain(chain);
+    setTokenAddress('');
+    setHasProcessedData(false); // Reset processing state on chain change
+  };
+
+  const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    const pastedText = event.clipboardData.getData('Text');
+    setTokenAddress(pastedText);
+    setHasProcessedData(false); // Reset processing state on new paste
+  };
 
   const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: tokenAnimation,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
-  }
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
 
   return (
     <Card className="border-none bg-gray-900 overflow-hidden md:row-span-1 shadow-lg">
@@ -88,7 +101,10 @@ export default function TokenInfo() {
                   <Button
                     variant="outline"
                     className="w-16 h-16 p-0 rounded-full bg-gray-800 border-2 border-gray-700 hover:bg-gray-700 hover:border-purple-500 transition-all duration-300"
-                    onClick={() => setTokenAddress(token.address)}
+                    onClick={() => {
+                      setTokenAddress(token.address);
+                      setHasProcessedData(false); // Reset processing state on token select
+                    }}
                   >
                     <img src={token.image} alt={token.symbol} className="w-14 h-14 rounded-full" />
                   </Button>
@@ -106,6 +122,8 @@ export default function TokenInfo() {
               className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500 transition-all duration-300 h-12 text-lg"
               value={tokenAddress}
               onChange={(e) => setTokenAddress(e.target.value)}
+              onPaste={handlePaste}
+              readOnly
             />
           </div>
           <Popover>
@@ -129,6 +147,13 @@ export default function TokenInfo() {
             </PopoverContent>
           </Popover>
         </div>
+        <Button
+          variant="default"
+          className="mt-4 bg-purple-500 hover:bg-purple-600 text-white"
+          onClick={() => setTokenAddress(tokenAddress)} // Set fetchData to true when button is clicked
+        >
+          Fetch Token Info
+        </Button>
         <AnimatePresence mode="wait">
           <motion.div
             key={tokenLoading || balanceLoading ? 'loading' : 'data'}
@@ -187,5 +212,5 @@ export default function TokenInfo() {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

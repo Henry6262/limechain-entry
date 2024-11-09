@@ -1,8 +1,17 @@
-import NextAuth from "next-auth";
+import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { getCsrfToken } from "next-auth/react";
+import { getCsrfToken, Session } from "next-auth/react";
 import { SiweMessage } from "siwe";
 import { NextApiRequest, NextApiResponse } from 'next';
+
+interface ExtendedSession extends Session {
+  address?: string;
+  user?: {
+    name?: string;
+    image?: string;
+  };
+  expires: string;
+}
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   const providers = [
@@ -53,10 +62,13 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     secret:'somereallysecretsecret',
     callbacks: {
       async session({ session, token }) {
-        session.address = token.sub;
-        session.user!.name = token.sub;
-        session.user!.image = "https://www.fillmurray.com/128/128";
-        return session;
+        const extendedSession: ExtendedSession = session as ExtendedSession;
+        extendedSession.address = token.sub;
+        extendedSession.user = extendedSession.user || {};
+        extendedSession.user.name = token.sub;
+        extendedSession.user.image = "https://www.fillmurray.com/128/128";
+        extendedSession.expires = session.expires;
+        return extendedSession;
       },
     },
   });

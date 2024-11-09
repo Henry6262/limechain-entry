@@ -5,10 +5,10 @@ export const supportedChains = [
       icon: 'https://res.cloudinary.com/dkjo3cxxr/image/upload/v1721388979/Ethereum-Logo-PNG-Pic_mbrek6.png',
       tokens: [
         { symbol: 'ETH', address: 'native', image: 'https://res.cloudinary.com/dkjo3cxxr/image/upload/v1721388979/Ethereum-Logo-PNG-Pic_mbrek6.png' },
-        { symbol: 'USDT', address: '0xdAC17F958D2ee523a2206206994597C13D831ec7', image: '/usdt-logo.png' },
-        { symbol: 'USDC', address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', image: '/usdc-logo.png' },
-        { symbol: 'LINK', address: '0x514910771AF9Ca656af840dff83E8264EcF986CA', image: '/link-logo.png' },
-        { symbol: 'UNI', address: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', image: '/uni-logo.png' },
+        { symbol: 'USDT', address: '0xdAC17F958D2ee523a2206206994597C13D831ec7', image: '/images/tether.png' },
+        { symbol: 'USDC', address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', image: '/images/usdc.png' },
+        { symbol: 'LINK', address: '0x514910771AF9Ca656af840dff83E8264EcF986CA', image: '/images/chainlink.png' },
+        { symbol: 'UNI', address: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', image: '/images/uni.png' },
       ]
     },
     { 

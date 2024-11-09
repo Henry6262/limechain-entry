@@ -1,9 +1,18 @@
 import { useGasPrice, useBalance, useChainId, useTransactionCount } from 'wagmi';
 import { mainnet } from 'wagmi/chains';
-import { useSession } from 'next-auth/react';
+import { Session, useSession } from 'next-auth/react';
+import { formatEthereumAddress } from './utils';
+
+// Extend the Session type
+interface ExtendedSession extends Session {
+  address?: string;
+}
 
 export function useBlockchainData() {
   const { data: session } = useSession();
+
+  // Type assertion to ExtendedSession
+  const extendedSession = session as ExtendedSession;
 
   // Fetch gas price
   const { data: gasPriceData, isError: gasPriceError } = useGasPrice({
@@ -12,7 +21,7 @@ export function useBlockchainData() {
 
   // Fetch wallet balance
   const { data: balanceData, isError: balanceError } = useBalance({
-    address: session?.address,
+    address: formatEthereumAddress(extendedSession?.address),
     chainId: mainnet.id,
   });
 
@@ -21,7 +30,7 @@ export function useBlockchainData() {
 
   // Fetch transaction count
   const { data: transactionCount, isError: transactionCountError } = useTransactionCount({
-    address: session?.address,
+    address: formatEthereumAddress(extendedSession?.address),
     chainId: mainnet.id,
   });
 
