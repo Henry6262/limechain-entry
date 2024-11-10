@@ -15,8 +15,8 @@ export default function Overview() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-4 sm:p-8">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-6">Dashboard</h1>
+    <div className="min-h-screen text-white">
+      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
       
       {/* Tasks Section */}
       <div className="w-full overflow-hidden">

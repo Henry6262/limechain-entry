@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import Sidebar from './sidebar/Sidebar';
 import BlockchainSection from '../sections/blockchain/Blockchain';
 import OverviewSection from '../sections/overview/Overview'; 
-import StatsSection from '../sections/nfts/NFTs'; 
+import NFTSection from '../sections/nfts/NFTs'; 
 import Nav from '../common/Nav';
 import Modal from '../common/Modal';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
@@ -31,7 +31,7 @@ export default function DashboardLayout() {
       case 'Blockchain':
         return <BlockchainSection />;
       case 'Stats':
-        return <StatsSection />;
+        return <NFTSection />;
       default:
         return <BlockchainSection />;
     }
@@ -40,7 +40,7 @@ export default function DashboardLayout() {
   return (
     <div className="flex">
       <Sidebar setActiveSection={setActiveSection} />
-      <main className="flex-1 overflow-hidden">
+      <main className="p-16 flex-1 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
 
         <Nav position={'absolute'} displayLogo={false}></Nav>
         {renderActiveSection()}

@@ -18,9 +18,8 @@ export default function BlockchainDashboard() {
   } = useBlockchainData();
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900`}>
-      <div className="flex flex-col text-white">
-        <main className="flex-1 p-16 max-w-7xl mx-auto w-full">
+    <div className={`min-h-screen `}>
+      <div className="flex w-full flex-col text-white">
           <h2 className="text-3xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
             Blockchain Dashboard
           </h2>
@@ -56,7 +55,6 @@ export default function BlockchainDashboard() {
               <RecentActivity transactionCount={transactionCount} />
             </div>
           </div>
-        </main>
       </div>
     </div>
   );

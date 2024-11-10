@@ -1,30 +1,52 @@
 'use client'
 
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect } from 'react';
+import { useNFTStore } from '../../../store/useNFTStore';
 import NFTsDistributionCard from './NFTsDistributionCard';
 import NFTsFloorPricesCard from './NFTsFloorPricesCard';
+import NFTsInfoCard from './NFTsInfoCard';
 
-export default function Stats() {
+export default function NFTsPage() {
+  const { collections, selectedCollection, loading, fetchCollections, fetchSelectedCollectionData, setSelectedCollection } = useNFTStore();
+
+  useEffect(() => {
+    if (!collections) {
+      fetchCollections();
+    }
+  }, [collections, fetchCollections]);
+
+  useEffect(() => {
+    if (selectedCollection) {
+      fetchSelectedCollectionData(selectedCollection.collection_id);
+    }
+  }, [selectedCollection, fetchSelectedCollectionData]);
+
+  const handleCollectionClick = (collectionId: string) => {
+    if (collections) {
+      const collection = collections.get(collectionId);
+      if (collection) {
+        setSelectedCollection(collection);
+      }
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="min-h-screen bg-black text-white p-8">
-      <h2 className="text-3xl font-semibold mb-6 mt-4">NFT Collections Overview</h2>
+    <div className="min-h-screen text-white">
+      <h2 className="text-3xl font-bold mb-6">NFT Collections Overview</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <Card className="border-purple-500 bg-gray-900">
-          <CardHeader>
-            <CardTitle>Asset Overview</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {/* Other content */}
-          </CardContent>
-        </Card>
-
-        {/* Include the NFTsDistributionCard component */}
+        {selectedCollection && collections && (
+          <NFTsInfoCard
+            collection={selectedCollection}
+            collections={collections}
+            onCollectionClick={handleCollectionClick}
+          />
+        )}
         <NFTsDistributionCard />
       </div>
-
-      {/* Include the NFTsFloorPricesCard component outside the grid */}
       <div className="mt-8">
         <NFTsFloorPricesCard />
       </div>

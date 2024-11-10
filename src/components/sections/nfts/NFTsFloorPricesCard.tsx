@@ -57,7 +57,7 @@ export default function NFTsFloorPricesCard() {
   }, [collectionId, activeDateRange])
 
   return (
-    <Card className="w-full mx-auto bg-card">
+    <Card className="w-full mx-auto">
       <CardHeader className="flex flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
         <CardTitle className="text-2xl font-bold text-primary">Floor Prices</CardTitle>
         <MarketplaceSelector activeMarketplace={activeMarketplace} setActiveMarketplace={setActiveMarketplace} />

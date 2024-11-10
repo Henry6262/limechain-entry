@@ -1,14 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PieChart as PieChartIcon, BarChart as BarChartIcon, BarChart3 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { fetchDistributionData, fetchHoldingPeriodDistribution } from '@/handlers/getNFTCollectionData';
+import { useNFTStore } from '../../../store/useNFTStore';
 import RadarChart from '../../charts/RadarChart';
 import RadialChart from '../../charts/RadialChart';
-import { NFTHolderDistributionResponse } from '@/types/types';
 
 const chartTypes = [
   { id: 'pie', name: 'Holding Period', icon: PieChartIcon },
@@ -26,54 +25,25 @@ const purpleShades = [
 ];
 
 export default function NFTsDistributionCard() {
+  const { distributionData, holdingPeriodData } = useNFTStore();
   const [activeChart, setActiveChart] = useState('pie');
-  const [radialChartData, setRadialChartData] = useState<Array<{ label: string; value: number; color: string }> | null>(null);
-  const [RadarChartData, SetRadarChartData] = useState<Array<{ label: string; value: number; color: string }> | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [distributionData, setDistributionData] = useState<NFTHolderDistributionResponse['data'] | null>(null);
-
-  const contractAddress = '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d'; // Example contract address
-
-  useEffect(() => {
-    const loadDistributionData = async () => {
-      const data = await fetchDistributionData(contractAddress);
-      if (data) {
-        setDistributionData(data);
-        const transformedData = data.distribution.map((item, index) => ({
-          label: item.name,
-          value: parseFloat(item.proportion),
-          color: purpleShades[index % purpleShades.length] 
-        }));
-        SetRadarChartData(transformedData) 
-        console.log('Distribution Data:', data);
-      }
-    };
-
-    const loadHoldingPeriodDistribution = async () => {
-      const data = await fetchHoldingPeriodDistribution(contractAddress);
-      if (data) {
-        const transformedData = data.data.distribution.map((item, index) => ({
-          label: item.name,
-          value: parseFloat(item.proportion),
-          color: purpleShades[index % purpleShades.length] 
-        }));
-        setRadialChartData(transformedData); // 
-        console.log('Holding Period Distribution Data:', data);
-      }
-    };
-
-    loadDistributionData();
-    loadHoldingPeriodDistribution();
-  }, [contractAddress]);
 
   const renderChart = () => {
-    if (error) {
-      return <p className="text-red-500">{error}</p>;
-    }
-
-    if (!radialChartData || !distributionData) {
+    if (!holdingPeriodData || !distributionData) {
       return <p>Loading...</p>;
     }
+
+    const radialChartData = holdingPeriodData.data.distribution.map((item, index) => ({
+      label: item.name,
+      value: parseFloat(item.proportion),
+      color: purpleShades[index % purpleShades.length],
+    }));
+
+    const radarChartData = distributionData.distribution.map((item, index) => ({
+      label: item.name,
+      value: parseFloat(item.proportion),
+      color: purpleShades[index % purpleShades.length],
+    }));
 
     return (
       <motion.div
@@ -84,8 +54,8 @@ export default function NFTsDistributionCard() {
         transition={{ duration: 0.3 }}
         className="h-64 flex items-center justify-center text-white"
       >
-        {activeChart === 'pie' && radialChartData && <RadialChart data={radialChartData} />}
-        {activeChart === 'bar' && RadarChartData && <RadarChart data={RadarChartData} />}
+        {activeChart === 'pie' && <RadialChart data={radialChartData} />}
+        {activeChart === 'bar' && <RadarChart data={radarChartData} />}
       </motion.div>
     );
   };

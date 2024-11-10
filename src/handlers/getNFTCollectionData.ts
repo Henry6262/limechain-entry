@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { FloorPriceResponse, NFTHolderDistributionResponse } from '../types/types';
+import { FloorPriceResponse, NFTHolderDistributionResponse, SimpleHashCollectionResponse } from '../types/types';
 import { formatFloorPriceData } from '../lib/utils';
+import { collectionIds } from '../lib/helpers/collectionIds';
 
 export async function fetchFloorPrices(collectionId: string, startDate: string, endDate: string): Promise<FloorPriceResponse | null> {
   try {
@@ -41,6 +42,38 @@ export async function fetchHoldingPeriodDistribution(contractAddress: string): P
     return response.data;
   } catch (err) {
     console.error('Error fetching holding period distribution:', err);
+    return null;
+  }
+}
+
+export async function fetchNFTCollectionInfoByID(collectionIds: string): Promise<SimpleHashCollectionResponse | null> {
+  try {
+    const response = await axios.get<SimpleHashCollectionResponse>('/api/simplehash/fetchNFTCollectionInfoByID', {
+      params: {
+        collectionIds,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    console.error('Error fetching NFT collection info:', err);
+    return null;
+  }
+}
+
+export async function fetchAllCollections(): Promise<Map<string, SimpleHashCollectionResponse['collections'][0]> | null> {
+  try {
+    const ids = Object.values(collectionIds).join(',');
+    const response = await fetchNFTCollectionInfoByID(ids);
+    if (response) {
+      const collectionMap = new Map();
+      response.collections.forEach(collection => {
+        collectionMap.set(collection.collection_id, collection);
+      });
+      return collectionMap;
+    }
+    return null;
+  } catch (err) {
+    console.error('Error fetching all collections:', err);
     return null;
   }
 }

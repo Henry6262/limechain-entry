@@ -59,4 +59,50 @@ export interface NFTHolderDistributionResponse {
     total: number;
     distribution: DistributionItem[];
   };
+}
+
+export interface SimpleHashCollection {
+  collection_id: string;
+  name: string;
+  description: string;
+  image_url: string;
+  image_properties: {
+    width: number;
+    height: number;
+    mime_type: string;
+  };
+  banner_image_url: string;
+  external_url: string;
+  twitter_username: string;
+  discord_url: string;
+  instagram_username: string;
+  medium_username: string | null;
+  telegram_url: string | null;
+  floor_prices: {
+    marketplace_id: string;
+    marketplace_name: string;
+    value: number;
+    payment_token: {
+      payment_token_id: string;
+      name: string;
+      symbol: string;
+      address: string | null;
+      decimals: number;
+    };
+    value_usd_cents: number;
+  }[];
+  distinct_owner_count: number;
+  distinct_nft_count: number;
+  total_quantity: number;
+  collection_royalties: {
+    total_creator_fee_basis_points: number;
+  }[];
+  marketplace_pages: {
+    collection_url: string;
+  }[];
+  top_contracts: string[];
+}
+
+export interface SimpleHashCollectionResponse {
+  collections: SimpleHashCollection[];
 } 
