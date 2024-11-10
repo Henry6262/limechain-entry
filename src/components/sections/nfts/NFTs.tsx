@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNFTStore } from '../../../store/useNFTStore';
 import NFTsDistributionCard from './NFTsDistributionCard';
 import NFTsFloorPricesCard from './NFTsFloorPricesCard';
@@ -9,6 +9,8 @@ import NFTsInfoCard from './NFTsInfoCard';
 export default function NFTsPage() {
   const { collections, selectedCollection, loading, fetchCollections, fetchSelectedCollectionData, setSelectedCollection } = useNFTStore();
 
+  const prevSelectedCollectionRef = useRef(selectedCollection);
+
   useEffect(() => {
     if (!collections) {
       fetchCollections();
@@ -16,8 +18,10 @@ export default function NFTsPage() {
   }, [collections, fetchCollections]);
 
   useEffect(() => {
-    if (selectedCollection) {
+    if (selectedCollection && selectedCollection !== prevSelectedCollectionRef.current) {
+      console.log('Selected collection changed:', selectedCollection.collection_id);
       fetchSelectedCollectionData(selectedCollection.collection_id);
+      prevSelectedCollectionRef.current = selectedCollection;
     }
   }, [selectedCollection, fetchSelectedCollectionData]);
 
