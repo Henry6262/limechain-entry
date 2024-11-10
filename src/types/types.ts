@@ -1,3 +1,5 @@
+import {subDays, subMonths} from 'date-fns'
+
 export interface Task {
   id: number;
   title: string;
@@ -105,4 +107,16 @@ export interface SimpleHashCollection {
 
 export interface SimpleHashCollectionResponse {
   collections: SimpleHashCollection[];
-} 
+}
+
+export type DateRange = {
+  id: string;
+  label: string;
+  subtract: () => Date;
+};
+
+export const dateRanges: DateRange[] = [
+  { id: '7d', label: '7D', subtract: () => subDays(new Date(), 7) },
+  { id: '1m', label: '1M', subtract: () => subMonths(new Date(), 1) },
+  { id: '3m', label: '3M', subtract: () => subMonths(new Date(), 3) },
+]; 

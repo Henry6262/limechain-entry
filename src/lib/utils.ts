@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { FloorPriceResponse } from '../types/types';
+import { FloorPriceResponse, dateRanges, DateRange } from '../types/types';
+import { format } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -36,4 +37,12 @@ export function formatFloorPriceData(floorPriceResponse: FloorPriceResponse) {
   }
 
   return formattedData;
+}
+
+export function generateDateRangeParams(): Array<{ id: string; startDate: string; endDate: string }> {
+  return dateRanges.map((range: DateRange) => ({
+    id: range.id,
+    startDate: format(range.subtract(), 'yyyy-MM-dd'),
+    endDate: format(new Date(), 'yyyy-MM-dd'),
+  }));
 }

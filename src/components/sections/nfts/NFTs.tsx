@@ -5,9 +5,11 @@ import { useNFTStore } from '../../../store/useNFTStore';
 import NFTsDistributionCard from './NFTsDistributionCard';
 import NFTsFloorPricesCard from './NFTsFloorPricesCard';
 import NFTsInfoCard from './NFTsInfoCard';
+import { fetchFloorPricesForAllRanges } from '../../../handlers/getNFTCollectionData';
+import { generateDateRangeParams } from '../../../lib/utils';
 
 export default function NFTsPage() {
-  const { collections, selectedCollection, loading, fetchCollections, fetchSelectedCollectionData, setSelectedCollection } = useNFTStore();
+  const { collections, selectedCollection, loading, fetchCollections, fetchSelectedCollectionData, setSelectedCollection, setFloorPricesData } = useNFTStore();
 
   const prevSelectedCollectionRef = useRef(selectedCollection);
 
@@ -18,12 +20,20 @@ export default function NFTsPage() {
   }, [collections, fetchCollections]);
 
   useEffect(() => {
-    if (selectedCollection && selectedCollection !== prevSelectedCollectionRef.current) {
-      console.log('Selected collection changed:', selectedCollection.collection_id);
-      fetchSelectedCollectionData(selectedCollection.collection_id);
-      prevSelectedCollectionRef.current = selectedCollection;
-    }
-  }, [selectedCollection, fetchSelectedCollectionData]);
+    const fetchFloorPrices = async () => {
+      if (selectedCollection && selectedCollection !== prevSelectedCollectionRef.current) {
+        console.log('Selected collection changed:', selectedCollection.collection_id);
+        fetchSelectedCollectionData(selectedCollection.collection_id);
+        prevSelectedCollectionRef.current = selectedCollection;
+
+        const dateRangeParams = generateDateRangeParams();
+        const dataMap = await fetchFloorPricesForAllRanges(selectedCollection.collection_id, dateRangeParams);
+        setFloorPricesData(dataMap);
+      }
+    };
+
+    fetchFloorPrices();
+  }, [selectedCollection, fetchSelectedCollectionData, setFloorPricesData]);
 
   const handleCollectionClick = (collectionId: string) => {
     if (collections) {

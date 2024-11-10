@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { SimpleHashCollection, NFTHolderDistributionResponse } from '../types/types';
+import { SimpleHashCollection, NFTHolderDistributionResponse, FloorPriceResponse } from '../types/types';
 import { fetchAllCollections, fetchDistributionData, fetchHoldingPeriodDistribution } from '../handlers/getNFTCollectionData';
 
 interface NFTState {
@@ -7,10 +7,12 @@ interface NFTState {
   selectedCollection: SimpleHashCollection | null;
   distributionData: NFTHolderDistributionResponse['data'] | null;
   holdingPeriodData: any; // Define the type based on your API response
+  floorPricesData: Record<string, FloorPriceResponse | null> | null;
   loading: boolean;
   fetchCollections: () => Promise<void>;
   fetchSelectedCollectionData: (collectionId: string) => Promise<void>;
   setSelectedCollection: (collection: SimpleHashCollection) => void;
+  setFloorPricesData: (data: Record<string, FloorPriceResponse | null>) => void;
 }
 
 export const useNFTStore = create<NFTState>((set, get) => ({
@@ -18,6 +20,7 @@ export const useNFTStore = create<NFTState>((set, get) => ({
   selectedCollection: null,
   distributionData: null,
   holdingPeriodData: null,
+  floorPricesData: null,
   loading: true,
   fetchCollections: async () => {
     set({ loading: true });
@@ -45,5 +48,8 @@ export const useNFTStore = create<NFTState>((set, get) => ({
   },
   setSelectedCollection: (collection: SimpleHashCollection) => {
     set({ selectedCollection: collection });
+  },
+  setFloorPricesData: (data: Record<string, FloorPriceResponse | null>) => {
+    set({ floorPricesData: data });
   },
 }));

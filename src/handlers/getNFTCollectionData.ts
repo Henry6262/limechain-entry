@@ -3,23 +3,28 @@ import { FloorPriceResponse, NFTHolderDistributionResponse, SimpleHashCollection
 import { formatFloorPriceData } from '../lib/utils';
 import { collectionIds } from '../lib/helpers/collectionIds';
 
-export async function fetchFloorPrices(collectionId: string, startDate: string, endDate: string): Promise<FloorPriceResponse | null> {
-  try {
-    const response = await axios.get<FloorPriceResponse>('/api/simplehash/fetchNFTCollectionFPrices', {
-      params: {
-        collectionId,
-        granularity: 'daily',
-        startDate,
-        endDate,
-      },
-    });
-    const formattedData = formatFloorPriceData(response.data);
-    console.log('Formatted Floor Price Data:', formattedData);
-    return response.data;
-  } catch (err) {
-    console.error('Error fetching floor prices:', err);
-    return null;
-  }
+export async function fetchFloorPricesForAllRanges(collectionId: string, dateRanges: Array<{ id: string; startDate: string; endDate: string }>): Promise<Record<string, FloorPriceResponse | null>> {
+  const results: Record<string, FloorPriceResponse | null> = {};
+
+  await Promise.all(dateRanges.map(async (range) => {
+    try {
+      const response = await axios.get<FloorPriceResponse>('/api/simplehash/fetchNFTCollectionFPrices', {
+        params: {
+          collectionId,
+          granularity: 'daily',
+          startDate: range.startDate,
+          endDate: range.endDate,
+        },
+      });
+      console.log(`Raw Floor Price Data for ${range.id}:`, response.data);
+      results[range.id] = response.data;
+    } catch (err) {
+      console.error(`Error fetching floor prices for ${range.id}:`, err);
+      results[range.id] = null;
+    }
+  }));
+
+  return results;
 }
 
 export async function fetchDistributionData(contractAddress: string): Promise<NFTHolderDistributionResponse['data'] | null> {

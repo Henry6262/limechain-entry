@@ -5,17 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
-import { fetchFloorPrices } from '@/handlers/getNFTCollectionData'
+import { useNFTStore } from '../../../store/useNFTStore'
 import { formatFloorPriceData } from '@/lib/utils'
 import { format, subDays, subMonths } from 'date-fns'
 import CombinedAreaChart from '../../charts/CombinedAreaChart'
 import BarChartInteractive from '../../charts/BarChartInteractive'
-
-const dateRanges = [
-  { id: '7d', label: '7D', subtract: () => subDays(new Date(), 7) },
-  { id: '1m', label: '1M', subtract: () => subMonths(new Date(), 1) },
-  { id: '3m', label: '3M', subtract: () => subMonths(new Date(), 3) },
-]
+import { dateRanges, FloorPriceResponse } from '../../../types/types'
+import { generateDateRangeParams } from '../../../lib/utils'
 
 function MarketplaceSelector({ activeMarketplace, setActiveMarketplace }: { activeMarketplace: 'blur' | 'opensea'; setActiveMarketplace: (marketplace: 'blur' | 'opensea') => void }) {
   return (
@@ -32,29 +28,23 @@ function MarketplaceSelector({ activeMarketplace, setActiveMarketplace }: { acti
 }
 
 export default function NFTsFloorPricesCard() {
+  const { floorPricesData } = useNFTStore();
   const [activeDateRange, setActiveDateRange] = useState('7d')
   const [activeMarketplace, setActiveMarketplace] = useState<'blur' | 'opensea'>('blur')
   const [combinedChartData, setCombinedChartData] = useState<Array<{ date: string; blur: number | null; opensea: number | null }> | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const collectionId = '09954610564c25f6910ccd963c09a3fa' // Example collection ID
-
   useEffect(() => {
-    const loadFloorPrices = async () => {
-      const endDate = format(new Date(), 'yyyy-MM-dd')
-      const startDate = format(dateRanges.find(range => range.id === activeDateRange)?.subtract() || new Date(), 'yyyy-MM-dd')
-      const data = await fetchFloorPrices(collectionId, startDate, endDate)
-      if (data) {
-        const formattedData = formatFloorPriceData(data)
-        console.log('Formatted data for charts:', formattedData)
-        setCombinedChartData(formattedData)
+    if (floorPricesData) {
+      const dataForActiveRange = floorPricesData[activeDateRange];
+      if (dataForActiveRange) {
+        const formattedData = formatFloorPriceData(dataForActiveRange);
+        setCombinedChartData(formattedData);
       } else {
-        setError('Failed to fetch floor prices')
+        setError(`No data available for the selected date range: ${activeDateRange}`);
       }
     }
-
-    loadFloorPrices()
-  }, [collectionId, activeDateRange])
+  }, [activeDateRange, floorPricesData]);
 
   return (
     <Card className="w-full mx-auto">
