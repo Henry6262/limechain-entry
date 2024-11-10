@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts"
 import {
   ChartConfig,
   ChartContainer,
@@ -28,63 +28,66 @@ const chartConfig = {
 
 export default function CombinedAreaChart({ data }: CombinedAreaChartProps) {
   return (
-    <ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
-      <AreaChart data={data}>
-        <defs>
-          <linearGradient id="fillBlur" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="var(--color-blur)" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="var(--color-blur)" stopOpacity={0.1} />
-          </linearGradient>
-          <linearGradient id="fillOpenSea" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="var(--color-opensea)" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="var(--color-opensea)" stopOpacity={0.1} />
-          </linearGradient>
-        </defs>
-        <CartesianGrid vertical={false} />
-        <XAxis
-          dataKey="date"
-          tickLine={false}
-          axisLine={false}
-          tickMargin={8}
-          minTickGap={32}
-          tickFormatter={(value) => {
-            const date = new Date(value)
-            return date.toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-            })
-          }}
-        />
-        <ChartTooltip
-          cursor={false}
-          content={
-            <ChartTooltipContent
-              labelFormatter={(value) => {
-                return new Date(value).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                })
-              }}
-              indicator="dot"
-            />
-          }
-        />
-        <Area
-          dataKey="blur"
-          type="natural"
-          fill="url(#fillBlur)"
-          stroke="var(--color-blur)"
-          stackId="a"
-        />
-        <Area
-          dataKey="opensea"
-          type="natural"
-          fill="url(#fillOpenSea)"
-          stroke="var(--color-opensea)"
-          stackId="a"
-        />
-        <ChartLegend content={<ChartLegendContent />} />
-      </AreaChart>
+    <ChartContainer config={chartConfig} className="h-[300px] w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+          <defs>
+            <linearGradient id="fillBlur" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="var(--color-blur)" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="var(--color-blur)" stopOpacity={0.1} />
+            </linearGradient>
+            <linearGradient id="fillOpenSea" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="var(--color-opensea)" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="var(--color-opensea)" stopOpacity={0.1} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis
+            dataKey="date"
+            tickLine={false}
+            axisLine={false}
+            tickMargin={8}
+            minTickGap={32}
+            tickFormatter={(value) => {
+              const date = new Date(value)
+              return date.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+              })
+            }}
+          />
+          <YAxis tickLine={false} axisLine={false} tickMargin={8} />
+          <ChartTooltip
+            cursor={false}
+            content={
+              <ChartTooltipContent
+                labelFormatter={(value) => {
+                  return new Date(value).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  })
+                }}
+                indicator="dot"
+              />
+            }
+          />
+          <Area
+            type="monotone"
+            dataKey="blur"
+            stackId="1"
+            stroke="var(--color-blur)"
+            fill="url(#fillBlur)"
+          />
+          <Area
+            type="monotone"
+            dataKey="opensea"
+            stackId="1"
+            stroke="var(--color-opensea)"
+            fill="url(#fillOpenSea)"
+          />
+          <ChartLegend content={<ChartLegendContent />} />
+        </AreaChart>
+      </ResponsiveContainer>
     </ChartContainer>
   )
 }
