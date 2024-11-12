@@ -49,8 +49,8 @@ export default function NFTsPage() {
   }
 
   return (
-    <div className="min-h-screen text-white">
-      <h2 className="text-3xl font-bold mb-6">NFT Collections Overview</h2>
+    <div className="min-h-screen ">
+      <h2 className="text-3xl text-tertiary font-bold mb-6">NFT Collections Overview</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {selectedCollection && collections && (
           <NFTsInfoCard

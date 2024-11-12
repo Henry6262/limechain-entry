@@ -119,4 +119,18 @@ export const dateRanges: DateRange[] = [
   { id: '7d', label: '7D', subtract: () => subDays(new Date(), 7) },
   { id: '1m', label: '1M', subtract: () => subMonths(new Date(), 1) },
   { id: '3m', label: '3M', subtract: () => subMonths(new Date(), 3) },
-]; 
+];
+
+export interface WalletData {
+  nfts: string;
+  collections: string;
+  transactions: {
+    total: string;
+  };
+  nft_transfers: {
+    total: string;
+  };
+  token_transfers: {
+    total: string;
+  };
+}

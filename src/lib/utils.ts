@@ -27,7 +27,7 @@ export function formatFloorPriceData(floorPriceResponse: FloorPriceResponse) {
     if (!acc[date]) {
       acc[date] = { blur: null, opensea: null };
     }
-    acc[date][item.marketplace_id] = item.floor_price ? item.floor_price / 1e18 : null; // Convert from wei to ETH
+    acc[date][item.marketplace_id as 'blur' | 'opensea'] = item.floor_price ? item.floor_price / 1e18 : null; // Convert from wei to ETH
     return acc;
   }, {} as Record<string, { blur: number | null; opensea: number | null }>);
 

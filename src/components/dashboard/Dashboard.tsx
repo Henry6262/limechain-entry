@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Sidebar from './sidebar/Sidebar';
 import BlockchainSection from '../sections/blockchain/Blockchain';
-import OverviewSection from '../sections/overview/Overview'; 
+import OverviewSection from '../sections/overview/overview'; 
 import NFTSection from '../sections/nfts/NFTs'; 
 import Nav from '../common/Nav';
 import Modal from '../common/Modal';
@@ -40,7 +40,7 @@ export default function DashboardLayout() {
   return (
     <div className="flex">
       <Sidebar setActiveSection={setActiveSection} />
-      <main className="p-16 flex-1 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+      <main className="p-8 sm:p-16 flex-1 bg-gradient-to-br from-[#05000f] via-[#1c073b] to-black overflow-hidden">
 
         <Nav position={'absolute'} displayLogo={false}></Nav>
         {renderActiveSection()}

@@ -11,20 +11,20 @@ interface BlockchainCardProps {
 
 export default function BlockchainCard({ title, icon, value, subValue, action }: BlockchainCardProps) {
   return (
-    <Card className="border-none bg-gray-900 overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
-      <CardHeader className="p-4 flex-row border-b border-gray-800 flex justify-between items-center">
-        <CardTitle className="text-sm font-medium flex items-center text-gray-400">
+    <Card className="overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
+      <CardHeader className="p-4 flex-row border-b flex justify-between items-center">
+        <CardTitle className="text-sm font-medium flex items-center ">
           <span className="mr-2 text-purple-400">{icon}</span>
           {title}
         </CardTitle>
         {action && <div>{action}</div>}
       </CardHeader>
       <CardContent className="p-4">
-        <div className="text-2xl font-bold text-white transition-colors">
+        <div className="text-2xl font-bold transition-colors">
           {value}
         </div>
         {subValue && (
-          <div className="mt-2 text-sm text-gray-500 flex items-center">
+          <div className="mt-2 text-sm flex items-center">
             {subValue}
           </div>
         )}

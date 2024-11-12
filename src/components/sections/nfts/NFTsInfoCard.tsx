@@ -19,10 +19,10 @@ export default function NFTsInfoCard({ collection, collections, onCollectionClic
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <Card className="w-full max-w-3xl bg-black border border-purple-700 text-white">
+    <Card className="w-full max-w-3xl border">
       <CardHeader className="relative p-0">
         <img src={collection.banner_image_url} alt={`${collection.name} banner`} className="w-full h-48 object-cover" />
-        <Avatar className="absolute bottom-0 left-4 transform translate-y-1/2 w-24 h-24 border-4 border-purple-700">
+        <Avatar className="absolute bottom-0 left-4 transform translate-y-1/2 w-24 h-24 border-4 border-primary">
           <img src={collection.image_url} alt={collection.name} className="object-cover" />
         </Avatar>
         <div className="absolute bottom-0 right-4 transform translate-y-1/2 flex gap-2">

@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 import { initialQuestTasks } from '@/lib/helpers/initialQuestTasks';
 import { Task, ActivityLogItem } from '@/types/types';
 import { toast } from '@/hooks/use-toast';
+import { getWalletStats } from '@/lib/moralisUtils';
 
 interface ProfileState {
   name: string;
@@ -10,6 +11,8 @@ interface ProfileState {
   walletAddress: string;
   tasks: Task[];
   activities: ActivityLogItem[];
+  totalPoints: number;
+  walletData: any;
   setName: (name: string) => void;
   setEmail: (email: string) => void;
   setWalletAddress: (walletAddress: string) => void;
@@ -18,6 +21,7 @@ interface ProfileState {
   updateTaskStatus: (taskId: number, status: 'Not Started' | 'In Progress' | 'Completed') => void;
   addActivity: (activity: ActivityLogItem) => void;
   initializeTasks: () => void;
+  initializeWalletData: () => Promise<void>;
 }
 
 const log = (config: any) => (set: any, get: any, api: any) =>
@@ -40,6 +44,8 @@ export const useProfileStore = create<ProfileState>()(
         walletAddress: '',
         tasks: [],
         activities: [],
+        totalPoints: 0,
+        walletData: null,
         setName: (name: any) => set(() => ({ name })),
         setEmail: (email: any) => set(() => ({ email })),
         setWalletAddress: (walletAddress: string) => set(() => ({ walletAddress })),
@@ -62,6 +68,7 @@ export const useProfileStore = create<ProfileState>()(
                     title: "Quest Completed!",
                     description: `You have completed the quest: "${task.title}".`,
                   });
+                  set({ totalPoints: state.totalPoints + task.points });
                 }
                 return { ...task, status };
               }
@@ -77,6 +84,18 @@ export const useProfileStore = create<ProfileState>()(
           const existingTasks = get().tasks;
           if (existingTasks.length === 0) {
             set(() => ({ tasks: initialQuestTasks }));
+          }
+        },
+        initializeWalletData: async () => {
+          const existingWalletData = get().walletData;
+          const walletAddress = get().walletAddress;
+          if (!existingWalletData && walletAddress) {
+            try {
+              const walletStats = await getWalletStats(walletAddress);
+              set(() => ({ walletData: walletStats }));
+            } catch (error) {
+              console.error('Failed to initialize wallet data:', error);
+            }
           }
         },
       }),

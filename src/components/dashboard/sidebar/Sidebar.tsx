@@ -14,6 +14,7 @@ import {
 import { SidebarAvatar } from './SidebarAvatar';
 import { SidebarNavItem } from './SidebarNavItem';
 import { MobileSidebar } from './SidebarMobile';
+import ThemeToggle from '@/components/common/ThemeToggle';
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Overview', href: '#' },
@@ -46,9 +47,7 @@ export default function DashboardSidebar({ setActiveSection }: { setActiveSectio
           </nav>
         </SidebarContent>
         <SidebarFooter className="p-4">
-          <Button className="w-full text-white">
-            Toggle Theme
-          </Button>
+          <ThemeToggle />
         </SidebarFooter>
       </Sidebar>
 

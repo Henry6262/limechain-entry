@@ -1,17 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import ProfileSection from './OverviewProfile';
-import OverviewTasks from './OverviewTasks';
+import { useEffect } from 'react';
+import ProfileSection from './overview-profile';
+import OverviewTasks from './overview-tasks';
 import { useProfileStore } from '@/store/useProfileStore';
-import OverviewActivity from './OverviewActivity';
+import OverviewActivity from './overview-activity';
 
 export default function Overview() {
-  const { tasks, initializeTasks } = useProfileStore();
+  const { tasks, initializeTasks, initializeWalletData } = useProfileStore();
 
   useEffect(() => {
     initializeTasks();
+    initializeWalletData(); 
   }, []);
 
   return (

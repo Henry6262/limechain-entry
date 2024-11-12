@@ -15,10 +15,10 @@ export default function RecentActivity({ transactionCount }: RecentActivityProps
   ]
 
   return (
-    <Card className="border-none bg-gray-900 overflow-hidden shadow-lg">
-      <CardHeader className="p-4 border-b border-gray-800">
+    <Card className="overflow-hidden shadow-lg">
+      <CardHeader className="p-4 border-b ">
         <div className="flex justify-between items-center">
-          <CardTitle className="text-lg font-bold flex items-center text-white">
+          <CardTitle className="text-lg font-bold flex items-center ">
             <Activity className="h-6 w-6 mr-2 text-purple-400" />
             Recent Activity
           </CardTitle>
@@ -31,14 +31,14 @@ export default function RecentActivity({ transactionCount }: RecentActivityProps
       <CardContent className="p-4">
         <div className="space-y-4">
           {activities.map((item, index) => (
-            <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-gray-800 hover:bg-gray-750 transition-colors">
+            <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-secondary hover:bg-gray-750 transition-colors">
               <div className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
                   <Activity className="h-5 w-5 text-purple-400" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-white">{item.type}</p>
-                  <p className="text-xs text-gray-400">{item.amount}</p>
+                  <p className="text-sm font-medium ">{item.type}</p>
+                  <p className="text-xs ">{item.amount}</p>
                 </div>
               </div>
               <div className="flex items-center">

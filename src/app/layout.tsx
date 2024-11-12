@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider"; // Import ThemeProvider
 import Wrapper from './wrapper'; // Import the Wrapper component
 
 const geistSans = localFont({
@@ -30,10 +31,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Wrapper>
-          {children}
-        </Wrapper>
-        <Toaster />
+      
+          <Wrapper>
+            {children}
+          </Wrapper>
+          <Toaster />
       </body>
     </html>
   );

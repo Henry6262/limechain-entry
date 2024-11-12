@@ -8,6 +8,7 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { RainbowKitSiweNextAuthProvider } from '@rainbow-me/rainbowkit-siwe-next-auth';
 import { config } from '../config/wagmi';
 import '@rainbow-me/rainbowkit/styles.css';
+import { ThemeProvider } from 'next-themes';
 
 // Configure the QueryClient with refetchOnWindowFocus set to false
 const queryClient = new QueryClient({
@@ -25,7 +26,14 @@ const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <QueryClientProvider client={queryClient}>
           <RainbowKitSiweNextAuthProvider>
             <RainbowKitProvider>
-              {children}
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="light"
+                enableSystem
+                
+              >
+                {children}
+              </ThemeProvider>
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
         </QueryClientProvider>

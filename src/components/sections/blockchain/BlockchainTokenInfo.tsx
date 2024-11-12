@@ -71,8 +71,8 @@ export default function TokenInfo() {
   };
 
   return (
-    <Card className="border-none bg-gray-900 overflow-hidden md:row-span-1 shadow-lg">
-      <CardHeader className="pb-4 pl-0 pt-0 flex-row border-b border-gray-800 flex items-center">
+    <Card className="overflow-hidden md:row-span-1 shadow-lg">
+      <CardHeader className="pb-4 pl-0 pt-0 flex-row border-b  flex items-center">
         <div className="flex-shrink-0">
           <Lottie options={defaultOptions} height={80} width={110} />
         </div>
@@ -82,7 +82,7 @@ export default function TokenInfo() {
       </CardHeader>
       <CardContent className="p-6 space-y-8">
         <div>
-          <Label className="text-lg font-medium text-gray-300 mb-3 block">Quick Select</Label>
+          <Label className="text-lg font-medium mb-3 block">Quick Select</Label>
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedChain.id}
@@ -100,7 +100,7 @@ export default function TokenInfo() {
                 >
                   <Button
                     variant="outline"
-                    className="w-16 h-16 p-0 rounded-full bg-gray-800 border-2 border-gray-700 hover:bg-gray-700 hover:border-purple-500 transition-all duration-300"
+                    className="w-16 h-16 p-0 rounded-full border-2  hover:border-purple-500 transition-all duration-300"
                     onClick={() => {
                       setTokenAddress(token.address);
                       setHasProcessedData(false); // Reset processing state on token select
@@ -115,11 +115,11 @@ export default function TokenInfo() {
         </div>
         <div className="flex items-end space-x-3">
           <div className="flex-1">
-            <Label htmlFor="token-address" className="text-lg font-medium text-gray-300 mb-2 block">Token Address</Label>
+            <Label htmlFor="token-address" className="text-lg font-medium mb-2 block">Token Address</Label>
             <Input
               id="token-address"
               placeholder="Enter Token Address"
-              className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500 transition-all duration-300 h-12 text-lg"
+              className="placeholder-gray-500 focus:border-purple-500 focus:ring-purple-500 transition-all duration-300 h-12 text-lg"
               value={tokenAddress}
               onChange={(e) => setTokenAddress(e.target.value)}
               onPaste={handlePaste}
@@ -132,12 +132,12 @@ export default function TokenInfo() {
                 <img src={selectedChain.icon} alt={selectedChain.name} className="w-8 h-8" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-48 p-0 bg-gray-800 border-gray-700">
+            <PopoverContent className="w-48 p-0 border-gray-700">
               {supportedChains.map((chain) => (
                 <Button
                   key={chain.id}
                   variant="ghost"
-                  className="w-full justify-start px-3 py-2 text-white hover:bg-gray-700"
+                  className="w-full justify-start px-3 py-2 hover:bg-gray-700"
                   onClick={() => handleChainChange(chain)}
                 >
                   <img src={chain.icon} alt={chain.name} className="w-6 h-6 mr-3" />
@@ -147,13 +147,6 @@ export default function TokenInfo() {
             </PopoverContent>
           </Popover>
         </div>
-        <Button
-          variant="default"
-          className="mt-4 bg-purple-500 hover:bg-purple-600 text-white"
-          onClick={() => setTokenAddress(tokenAddress)} // Set fetchData to true when button is clicked
-        >
-          Fetch Token Info
-        </Button>
         <AnimatePresence mode="wait">
           <motion.div
             key={tokenLoading || balanceLoading ? 'loading' : 'data'}
@@ -161,7 +154,7 @@ export default function TokenInfo() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-6 shadow-lg"
+            className="bg-secondary rounded-lg p-6 shadow-lg"
           >
             {tokenLoading || balanceLoading ? (
               <div className="flex flex-col items-center justify-center space-y-4 py-8">
@@ -183,20 +176,20 @@ export default function TokenInfo() {
             ) : (
               <div className="space-y-6">
                 <div className="flex justify-between items-center border-b border-gray-700 pb-4">
-                  <span className="text-xl text-gray-400">Name</span>
-                  <span className="text-2xl font-bold text-white bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                  <span className="text-xl">Name</span>
+                  <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
                     {tokenData?.name || 'N/A'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center border-b border-gray-700 pb-4">
-                  <span className="text-xl text-gray-400">Symbol</span>
-                  <span className="text-2xl font-bold text-white bg-gradient-to-r from-blue-400 to-green-500 bg-clip-text text-transparent">
+                  <span className="text-xl">Symbol</span>
+                  <span className="text-2xl font-bold  bg-gradient-to-r from-blue-400 to-green-500 bg-clip-text text-transparent">
                     {tokenData?.symbol || 'N/A'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xl text-gray-400">Balance</span>
-                  <span className="text-2xl font-bold text-white bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                  <span className="text-xl">Balance</span>
+                  <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                     {displayBalance}
                   </span>
                 </div>
@@ -204,12 +197,6 @@ export default function TokenInfo() {
             )}
           </motion.div>
         </AnimatePresence>
-        {tokenData && !tokenError && !balanceError && (
-          <div className="flex items-center justify-center text-green-400 space-x-3 py-2">
-            <CheckCircle2 className="h-8 w-8" />
-            <span className="text-xl font-medium">Token data fetched successfully</span>
-          </div>
-        )}
       </CardContent>
     </Card>
   );
