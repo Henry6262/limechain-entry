@@ -4,9 +4,10 @@ import { formatEthereumAddress } from './utils';
 interface UseTokenDataProps {
   tokenAddress: string;
   chainId: number;
+  walletAddress?: string;
 }
 
-export function useTokenData({ tokenAddress, chainId }: UseTokenDataProps) {
+export function useTokenData({ tokenAddress, chainId, walletAddress }: UseTokenDataProps) {
   const isNativeToken = tokenAddress === 'native';
 
   const { data: tokenData, isError: tokenError, isLoading: tokenLoading } = useToken({
@@ -15,7 +16,7 @@ export function useTokenData({ tokenAddress, chainId }: UseTokenDataProps) {
   });
 
   const { data: balanceData, isError: balanceError, isLoading: balanceLoading } = useBalance({
-    address: '0x4557B18E779944BFE9d78A672452331C186a9f48',
+    address: formatEthereumAddress(walletAddress),
     token: isNativeToken ? undefined : formatEthereumAddress(tokenAddress),
     chainId,
   });

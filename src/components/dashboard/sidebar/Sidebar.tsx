@@ -56,7 +56,7 @@ export default function DashboardSidebar({ setActiveSection }: { setActiveSectio
         variant="outline"
         size="icon"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="fixed right-4 top-4 z-50 bg-gray-950 text-white hover:bg-purple-900 md:hidden"
+        className="fixed left-4 top-4 z-50 bg-gray-950 text-white hover:bg-purple-900 md:hidden"
       >
         {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
       </Button>

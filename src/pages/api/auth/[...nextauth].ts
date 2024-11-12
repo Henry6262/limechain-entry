@@ -4,7 +4,7 @@ import { getCsrfToken, Session } from "next-auth/react";
 import { SiweMessage } from "siwe";
 import { NextApiRequest, NextApiResponse } from 'next';
 
-interface ExtendedSession extends Session {
+export interface ExtendedSession extends Session {
   address?: string;
   user?: {
     name?: string;

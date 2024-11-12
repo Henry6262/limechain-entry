@@ -3,7 +3,7 @@
 import React from 'react'
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from '@/components/ui/button'
-import { Plus, ListFilter } from 'lucide-react'
+import { Plus, ListFilter, CheckSquare } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,18 +31,43 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({
 }) => {
   return (
     <div className="flex items-center space-x-2 rounded-lg shadow-sm">
-      <Tabs value={taskFilter} onValueChange={setTaskFilter} className="w-auto">
-        <TabsList>
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="inProgress">In Progress</TabsTrigger>
-          <TabsTrigger value="completed">Completed</TabsTrigger>
-        </TabsList>
-      </Tabs>
+      <div className="hidden sm:block">
+        <Tabs value={taskFilter} onValueChange={setTaskFilter} className="w-auto">
+          <TabsList>
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="inProgress">In Progress</TabsTrigger>
+            <TabsTrigger value="completed">Completed</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+
+      <div className="sm:hidden">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <CheckSquare className="h-4 w-4" />
+              <span className="sr-only">Filter by status</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Task Status</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuRadioGroup 
+              value={taskFilter} 
+              onValueChange={setTaskFilter}
+            >
+              <DropdownMenuRadioItem value="all">All</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="inProgress">In Progress</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="completed">Completed</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">
-            <ListFilter className=" h-4 w-4" />
+            <ListFilter className="h-4 w-4" />
             <span className="sr-only">Filter by type</span>
           </Button>
         </DropdownMenuTrigger>

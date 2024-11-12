@@ -35,7 +35,6 @@ export default function OverviewTasks({ tasks }: OverviewTasksProps) {
   return (
     <div className="mb-8 w-full relative">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl sm:text-2xl font-semibold">Tasks</h2>
       </div>
       <Carousel>
         <div className="flex justify-between items-center mb-2">

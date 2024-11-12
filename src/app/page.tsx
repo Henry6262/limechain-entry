@@ -1,10 +1,10 @@
 import React from 'react';
-import FuturisticLandingPge from '../components/landing-page/Landing';
+import LandingPage from '../components/landing-page/landing';
 
 export default function Home() {
   return (
     <div>
-      <FuturisticLandingPge />
+      <LandingPage />
     </div>
 
   );

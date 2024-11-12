@@ -3,7 +3,7 @@
 import React from 'react';
 import TokenOverview from './blockchain-tokens-overview';
 import RecentActivity from './blockchain-activity';
-import BlockchainCards from './blockchain-cards';
+import BlockchainCards from './blockchain-info';
 
 export default function BlockchainDashboard() {
   return (

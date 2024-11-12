@@ -1,10 +1,12 @@
 'use client'
 
 import { useEffect } from 'react';
+import Lottie from 'react-lottie';
 import ProfileSection from './overview-profile';
 import OverviewTasks from './overview-tasks';
 import { useProfileStore } from '@/store/useProfileStore';
 import OverviewActivity from './overview-activity';
+import dashboardAnimation from '../../../../public/lottie/dashboard.json';
 
 export default function Overview() {
   const { tasks, initializeTasks, initializeWalletData } = useProfileStore();
@@ -14,9 +16,26 @@ export default function Overview() {
     initializeWalletData(); 
   }, []);
 
+  const lottieDefaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: dashboardAnimation,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
   return (
     <div className="min-h-screen text-white">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      <div className="flex items-center mb-6">
+        <Lottie 
+          options={lottieDefaultOptions} 
+          height={80} 
+          width={80} 
+          style={{ margin: 0 }}
+        />
+        <h2 className="text-3xl text-tertiary font-bold pl-4">Dashboard</h2>
+      </div>
       
       {/* Tasks Section */}
       <div className="w-full overflow-hidden">
