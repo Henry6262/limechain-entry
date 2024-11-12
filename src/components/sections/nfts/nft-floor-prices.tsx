@@ -8,10 +8,9 @@ import { Button } from "@/components/ui/button"
 import { useNFTStore } from '../../../store/useNFTStore'
 import { formatFloorPriceData } from '@/lib/utils'
 import { format, subDays, subMonths } from 'date-fns'
-import CombinedAreaChart from '../../charts/CombinedAreaChart'
-import BarChartInteractive from '../../charts/BarChartInteractive'
-import { dateRanges, FloorPriceResponse } from '../../../types/types'
-import { generateDateRangeParams } from '../../../lib/utils'
+import CombinedAreaChart from '../../charts/chart-combined-area'
+import BarChart from '../../charts/chart-bar'
+import { dateRanges } from '../../../types/types'
 
 function MarketplaceSelector({ activeMarketplace, setActiveMarketplace }: { activeMarketplace: 'blur' | 'opensea'; setActiveMarketplace: (marketplace: 'blur' | 'opensea') => void }) {
   return (
@@ -81,7 +80,7 @@ export default function NFTsFloorPricesCard() {
                   <CombinedAreaChart data={combinedChartData} />
                 </TabsContent>
                 <TabsContent value="bar">
-                  <BarChartInteractive data={combinedChartData} activeMarketplace={activeMarketplace} />
+                  <BarChart data={combinedChartData} activeMarketplace={activeMarketplace} />
                 </TabsContent>
               </>
             ) : (

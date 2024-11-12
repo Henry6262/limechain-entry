@@ -6,8 +6,13 @@ import { PieChart as PieChartIcon, BarChart as BarChartIcon, BarChart3, Trending
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useNFTStore } from '../../../store/useNFTStore'
-import RadarChart from '../../charts/RadarChart'
-import RadialChart from '../../charts/RadialChart'
+import RadarChart from '../../charts/chart-radar'
+import RadialChart from '../../charts/chart-radial'
+
+interface DistributionItem {
+  name: string;
+  proportion: string; 
+}
 
 const chartTypes = [
   { id: 'pie', name: 'Holding Period', icon: PieChartIcon },
@@ -23,7 +28,7 @@ export default function NFTsDistributionCard() {
       return <p>Loading...</p>
     }
 
-    const radialChartData = holdingPeriodData.data.distribution.map((item) => ({
+    const radialChartData = holdingPeriodData.data.distribution.map((item: DistributionItem) => ({
       label: item.name,
       value: parseFloat(item.proportion),
     }))
@@ -31,6 +36,7 @@ export default function NFTsDistributionCard() {
     const radarChartData = distributionData.distribution.map((item) => ({
       label: item.name,
       value: parseFloat(item.proportion),
+      color: 'hsl(var(--chart-1))',
     }))
 
     if (activeChart === 'pie') {

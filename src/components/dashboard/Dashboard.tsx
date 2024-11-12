@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import Sidebar from './sidebar/Sidebar';
-import BlockchainSection from '../sections/blockchain/Blockchain';
+import Sidebar from './sidebar/sidebar';
+import BlockchainSection from '../sections/blockchain/blockchain';
 import OverviewSection from '../sections/overview/overview'; 
-import NFTSection from '../sections/nfts/NFTs'; 
-import Nav from '../common/Nav';
-import Modal from '../common/Modal';
+import NFTSection from '../sections/nfts/nfts'; 
+import Nav from '../common/nav';
+import Modal from '../common/modal';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function DashboardLayout() {

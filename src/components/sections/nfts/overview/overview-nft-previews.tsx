@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation, Variants } from 'framer-motion';
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { SimpleHashCollection } from '../../../types/types';
+import { SimpleHashCollection } from '../../../../types/types';
 
 interface CollectionPreviewsProps {
     collections: Map<string, SimpleHashCollection>;
@@ -63,7 +63,7 @@ export default function CollectionPreviews({ collections, onCollectionClick }: C
                             zIndex: hoveredId === collection.collection_id ? 10 : 1,
                         }}
                         variants={itemVariants}
-                        initial={{ y: 0, transition: { duration: 0.3 } }}
+                        initial={{ y: 0 }}
                         whileHover={{
                             scale: 1.1,
                             y: -10,

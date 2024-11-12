@@ -39,10 +39,12 @@ const chartConfig = {
   },
 };
 
+type ChartConfigKey = '<24H' | '1-7D' | '7-30D' | '30D-3M' | '3M-1Y' | '>1Y';
+
 const RadialChart: React.FC<RadialChartProps> = ({ data }) => {
   const formattedData = data.map((item) => ({
     ...item,
-    fill: chartConfig[item.label]?.color || 'hsl(var(--chart-default))',
+    fill: chartConfig[item.label as ChartConfigKey]?.color || 'hsl(var(--chart-default))',
   }));
 
   return (

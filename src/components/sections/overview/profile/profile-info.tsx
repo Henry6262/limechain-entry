@@ -4,8 +4,8 @@ import { User, Mail, Edit2, Save } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { completeQuest } from '@/utils/questCompletionHandler';
-import { addActivity } from '@/utils/userActivityHandler';
+import { completeQuest } from '@/lib/handler-quest-completion';
+import { addActivity } from '@/lib/handler-user-activity';
 
 interface ProfileInfoProps {
   name: string;
@@ -31,7 +31,7 @@ export default function ProfileInfo({ name, email, setName, setEmail }: ProfileI
   };
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="relative flex items-center space-x-4">
       <Avatar className="w-20 h-20">
         <AvatarImage src="https://github.com/shadcn.png" alt="Profile picture" />
         <AvatarFallback>JD</AvatarFallback>
@@ -59,14 +59,16 @@ export default function ProfileInfo({ name, email, setName, setEmail }: ProfileI
                   placeholder="Your email"
                 />
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleSaveProfile}
-                aria-label="Save profile"
-              >
-                <Save className="h-4 w-4" />
-              </Button>
+              <div className="absolute top-0 right-0">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleSaveProfile}
+                  aria-label="Save profile"
+                >
+                  <Save className="h-4 w-4" />
+                </Button>
+              </div>
             </motion.div>
           ) : (
             <motion.div
@@ -84,14 +86,16 @@ export default function ProfileInfo({ name, email, setName, setEmail }: ProfileI
                   <Mail className="mr-2 h-4 w-4" /> {email}
                 </p>
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsEditing(true)}
-                aria-label="Edit profile"
-              >
-                <Edit2 className="h-4 w-4" />
-              </Button>
+              <div className="absolute top-0 right-0">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsEditing(true)}
+                  aria-label="Edit profile"
+                >
+                  <Edit2 className="h-4 w-4" />
+                </Button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

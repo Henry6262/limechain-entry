@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { watchBlocks } from '@wagmi/core';
 import { config } from '../../../config/wagmi';
-import BlockchainCard from './BlockchainCard';
+import BlockchainCard from './blockchain-card';
 import { Button } from '@/components/ui/button';
 import { Eye, EyeOff } from 'lucide-react';
 

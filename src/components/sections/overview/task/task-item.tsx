@@ -6,10 +6,9 @@ import { ChevronDown, ChevronUp, Trophy, Clipboard } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
 import { Task } from '@/types/types'
 import { useProfileStore } from '@/store/useProfileStore'
-import { addActivity } from '@/utils/userActivityHandler'
+import { addActivity } from '@/lib/handler-user-activity'
 
 interface TaskItemProps {
   task: Task

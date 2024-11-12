@@ -1,8 +1,8 @@
 import React from 'react';
 import { Wallet, Box, Link, Fuel } from 'lucide-react';
-import BlockchainCard from './BlockchainCard';
-import HOCBlockchainCard from './HocBlockchainCard';
-import { useBlockchainData } from '@/lib/fetchStaticBlockchainData';
+import BlockchainCard from './blockchain-card';
+import HOCBlockchainCard from './blockchain-hoc-card';
+import { useBlockchainData } from '@/lib/fetch-blockchain-data';
 
 export default function BlockchainCards() {
   const {

@@ -11,9 +11,9 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { motion, AnimatePresence } from 'framer-motion';
 import { supportedChains } from '@/lib/helpers/tokenAssetData';
 import tokenAnimation from '../../../../public/lottie/token.json';
-import { completeQuest } from '@/utils/questCompletionHandler';
-import { addActivity } from '@/utils/userActivityHandler';
-import { useTokenData } from '@/lib/fetchTokenData';
+import { completeQuest } from '@/lib/handler-quest-completion';
+import { addActivity } from '@/lib/handler-user-activity';
+import { useTokenData } from '@/lib/fetch-token-data';
 
 export default function TokenInfo() {
   const [tokenAddress, setTokenAddress] = useState('');

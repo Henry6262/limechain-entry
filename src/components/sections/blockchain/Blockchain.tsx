@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react';
-import TokenInformation from './BlockchainTokenInfo';
-import RecentActivity from './BlockchainActivity';
-import BlockchainCards from './BlockchainCards';
+import TokenOverview from './blockchain-tokens-overview';
+import RecentActivity from './blockchain-activity';
+import BlockchainCards from './blockchain-cards';
 
 export default function BlockchainDashboard() {
   return (
@@ -15,7 +15,7 @@ export default function BlockchainDashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <TokenInformation />
+            <TokenOverview />
           </div>
           <div className="space-y-6">
             <BlockchainCards />

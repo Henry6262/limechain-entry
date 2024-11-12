@@ -6,7 +6,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Twitter, Instagram, ExternalLink, MessageCircle } from 'lucide-react';
-import CollectionPreviews from './CollectionPreviews';
+import CollectionPreviews from './overview/overview-nft-previews';
 import { SimpleHashCollection } from '../../../types/types';
 
 interface NFTsInfoCardProps {

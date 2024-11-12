@@ -3,7 +3,7 @@
 import React from 'react';
 // import ParticleBackground from './LandingBG';
 import Content from './LandingContent';
-import Nav from '../common/Nav';
+import Nav from '../common/nav';
 
 export default function LandingPage() {
     return (

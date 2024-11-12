@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { useProfileStore } from '@/store/useProfileStore';
 import { Task } from '@/types/types';
 import { useToast } from '@/hooks/use-toast';
-import { completeQuest } from '@/utils/questCompletionHandler';
-import { addActivity } from '@/utils/userActivityHandler'; // Import the activity handler
+import { completeQuest } from '@/lib/handler-quest-completion';
+import { addActivity } from '@/lib/handler-user-activity'; // Import the activity handler
 
 interface TaskCreationProps {
   isOpen: boolean;

@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 import { useNFTStore } from '../../../store/useNFTStore';
-import NFTsDistributionCard from './NFTsDistributionCard';
-import NFTsFloorPricesCard from './NFTsFloorPricesCard';
-import NFTsInfoCard from './NFTsInfoCard';
+import NFTsDistributionCard from './nfts-distribution';
+import NFTsFloorPricesCard from './nft-floor-prices';
+import NFTsInfoCard from './nfts-overview';
 import { fetchFloorPricesForAllRanges } from '../../../handlers/getNFTCollectionData';
 import { generateDateRangeParams } from '../../../lib/utils';
 

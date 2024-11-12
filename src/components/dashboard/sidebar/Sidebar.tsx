@@ -11,10 +11,10 @@ import {
   SidebarFooter,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { SidebarAvatar } from './SidebarAvatar';
-import { SidebarNavItem } from './SidebarNavItem';
-import { MobileSidebar } from './SidebarMobile';
-import ThemeToggle from '@/components/common/ThemeToggle';
+import { SidebarAvatar } from './sidebar-avatar';
+import { SidebarNavItem } from './sidebar-nav-item';
+import { MobileSidebar } from './sidebar-mobile';
+import ThemeToggle from '@/components/common/theme-toggle';
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Overview', href: '#' },
