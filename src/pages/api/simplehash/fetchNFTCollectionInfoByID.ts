@@ -2,7 +2,6 @@ import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { SimpleHashCollectionResponse } from '@/types/types';
 
-const API_KEY = 'enriquemilos_sk_h74tjnin5gom4u00sdwhui91mh0rhc5t'; // Ensure this is stored securely in environment variables
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { collectionIds } = req.query;
@@ -16,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       `https://api.simplehash.com/api/v0/nfts/collections/ids`,
       {
         headers: {
-          'X-API-KEY': API_KEY,
+          'X-API-KEY': process.env.SIMPLEHASH_API_KEY,
           'accept': 'application/json',
         },
         params: {

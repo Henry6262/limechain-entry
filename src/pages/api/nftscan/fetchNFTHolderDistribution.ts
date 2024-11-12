@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       `https://restapi.nftscan.com/api/v2/statistics/amount/distribution/${contractAddress}`,
       {
         headers: {
-          'X-API-KEY': 'EeYZrMHegbdGgGfYidvvPYHO',
+          'X-API-KEY': process.env.NFTSCAN_API_KEY,
         },
       }
     );

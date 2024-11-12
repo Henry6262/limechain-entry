@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -8,12 +9,17 @@ import { Button } from "@/components/ui/button";
 
 export default function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
+  const [domLoaded, setDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === "light" ? "dark" : "light");
   };
 
-  if (!resolvedTheme) return null;
+  if (!resolvedTheme || !domLoaded) return null;
 
   return (
     <div className="flex items-center justify-center bg-transparent">

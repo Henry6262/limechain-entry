@@ -62,7 +62,7 @@ export default function TokenInfo() {
   return (
     <Card className="overflow-hidden md:row-span-1 shadow-lg">
       <TokenHeader />
-      <CardContent className="p-6 space-y-8">
+      <CardContent className="p-6 pb-12 space-y-8">
         <TokenQuickSelect
           selectedChain={selectedChain}
           setTokenAddress={setTokenAddress}

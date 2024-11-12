@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const options = {
     method: 'GET',
     headers: {
-      'X-API-KEY': 'enriquemilos_sk_h74tjnin5gom4u00sdwhui91mh0rhc5t',
+      'X-API-KEY': process.env.SIMPLEHASH_API_KEY,
       'accept': 'application/json',
     },
   };

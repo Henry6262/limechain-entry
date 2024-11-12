@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { SimpleHashCollection, NFTHolderDistributionResponse, FloorPriceResponse } from '../types/types';
-import { fetchAllCollections, fetchDistributionData, fetchHoldingPeriodDistribution } from '../handlers/getNFTCollectionData';
+import { fetchAllCollections, fetchDistributionData, fetchHoldingPeriodDistribution } from '../lib/fetch-nfts-data';
 
 interface NFTState {
   collections: Map<string, SimpleHashCollection> | null;

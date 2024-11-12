@@ -25,5 +25,13 @@ export const initialQuestTasks: Task[] = [
       status: 'Not Started',
       taskType: 'quest',
     },
+    {
+      id: 4,
+      title: 'Complete 3 Quests',
+      description: 'Complete any 3 quests to earn bonus points.',
+      points: 100,
+      status: 'Not Started',
+      taskType: 'quest',
+    },
     // Add more initial quest tasks as needed
   ];

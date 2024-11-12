@@ -35,8 +35,9 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({
         <Tabs value={taskFilter} onValueChange={setTaskFilter} className="w-auto">
           <TabsList>
             <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger value="inProgress">In Progress</TabsTrigger>
-            <TabsTrigger value="completed">Completed</TabsTrigger>
+            <TabsTrigger value="Not Started">Not Started</TabsTrigger>
+            <TabsTrigger value="In Progress">In Progress</TabsTrigger>
+            <TabsTrigger value="Completed">Completed</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
@@ -45,7 +46,7 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
-              <CheckSquare className="h-4 w-4" />
+              <CheckSquare className="h-4 w-4 text-black  dark:text-white" />
               <span className="sr-only">Filter by status</span>
             </Button>
           </DropdownMenuTrigger>
@@ -57,8 +58,9 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({
               onValueChange={setTaskFilter}
             >
               <DropdownMenuRadioItem value="all">All</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="inProgress">In Progress</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="completed">Completed</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="Not Started">Not Started</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="In Progress">In Progress</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="Completed">Completed</DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -67,7 +69,7 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">
-            <ListFilter className="h-4 w-4" />
+            <ListFilter className="h-4 w-4 text-black  dark:text-white" />
             <span className="sr-only">Filter by type</span>
           </Button>
         </DropdownMenuTrigger>
@@ -91,7 +93,7 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({
         onClick={openTaskCreationModal}
         className="bg-primary hover:bg-primary/90"
       >
-        <Plus className="h-4 w-4" />
+        <Plus className="h-4 w-4 text-black  dark:text-white" />
         <span className="sr-only">Create new task</span>
       </Button>
     </div>

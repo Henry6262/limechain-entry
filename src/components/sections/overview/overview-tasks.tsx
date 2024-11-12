@@ -24,10 +24,12 @@ export default function OverviewTasks({ tasks }: OverviewTasksProps) {
   const [isTaskCreationModalOpen, setIsTaskCreationModalOpen] = useState(false)
 
   const filteredTasks = tasks.filter(task => {
-    const statusMatch = taskFilter === 'all' || task.status.toLowerCase() === taskFilter
+    const statusMatch = taskFilter === 'all' || task.status === taskFilter
     const typeMatch = taskTypeFilter === 'all' || task.taskType === taskTypeFilter
     return statusMatch && typeMatch
   })
+
+  
 
   const openTaskCreationModal = () => setIsTaskCreationModalOpen(true)
   const closeTaskCreationModal = () => setIsTaskCreationModalOpen(false)
@@ -46,8 +48,8 @@ export default function OverviewTasks({ tasks }: OverviewTasksProps) {
           openTaskCreationModal={openTaskCreationModal}
         />
           <div className="flex gap-2">
-            <CarouselPrevious className='relative top-[0] left-[0] translate-y-0 ' />
-            <CarouselNext className='relative top-[0] right-[0] translate-y-0 ' />
+            <CarouselPrevious className='relative top-[0] text-black  dark:text-white left-[0] translate-y-0 ' />
+            <CarouselNext className='relative top-[0] text-black  dark:text-white right-[0] translate-y-0 ' />
           </div>
         </div>
         <CarouselContent className="-ml-4 pt-4">

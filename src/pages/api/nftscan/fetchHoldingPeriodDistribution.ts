@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NFTHolderDistributionResponse } from '@/types/types';
 
-const API_KEY = 'EeYZrMHegbdGgGfYidvvPYHO';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<NFTHolderDistributionResponse | { error: string }>) {
   const { contractAddress } = req.query;
@@ -16,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const response = await fetch(API_URL, {
       method: 'GET',
       headers: {
-        'X-API-KEY': API_KEY,
+        'X-API-KEY': process.env.NFTSCAN_API_KEY!,
       },
     });
 

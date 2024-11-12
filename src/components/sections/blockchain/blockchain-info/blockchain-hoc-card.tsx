@@ -6,6 +6,7 @@ import { config } from '../../../../config/wagmi';
 import BlockchainCard from './blockchain-card';
 import { Button } from '@/components/ui/button';
 import { Eye, EyeOff } from 'lucide-react';
+import Spinner from '@/components/common/spinner';
 
 interface BlockchainCardWithDataProps {
   title: string;
@@ -13,7 +14,7 @@ interface BlockchainCardWithDataProps {
 }
 
 export default function HocBlockchainCard({ title, icon }: BlockchainCardWithDataProps) {
-  const [blockNumber, setBlockNumber] = useState<string>('Loading...');
+  const [blockNumber, setBlockNumber] = useState<string | null>(null);
   const [transactionCount, setTransactionCount] = useState<number>(0);
   const [prevTransactionCount, setPrevTransactionCount] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
@@ -62,7 +63,7 @@ export default function HocBlockchainCard({ title, icon }: BlockchainCardWithDat
       <BlockchainCard
         title={title}
         icon={icon}
-        value={error ? 'Waiting for new block...' : blockNumber}
+        value={error ? <Spinner /> : blockNumber || <Spinner />}
         subValue={
           <div className="flex items-center">
             <span className="mr-2 text-xs text-gray-400">Transactions:</span>
@@ -78,7 +79,7 @@ export default function HocBlockchainCard({ title, icon }: BlockchainCardWithDat
           <Button
             variant="ghost"
             onClick={() => setIsWatching(!isWatching)}
-            className="p-0 hover:bg-transparent focus:bg-transparent active:bg-transparent"
+            className="p-0 h-fit hover:bg-transparent focus:bg-transparent active:bg-transparent"
           >
             {isWatching ? <EyeOff className="w-5 h-5 text-gray-400" /> : <Eye className="w-5 h-5 text-gray-400" />}
           </Button>

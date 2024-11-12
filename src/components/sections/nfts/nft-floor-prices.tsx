@@ -32,6 +32,7 @@ export default function NFTsFloorPricesCard() {
   const [activeMarketplace, setActiveMarketplace] = useState<'blur' | 'opensea'>('blur')
   const [combinedChartData, setCombinedChartData] = useState<Array<{ date: string; blur: number | null; opensea: number | null }> | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState('area');
 
   useEffect(() => {
     if (floorPricesData) {
@@ -48,12 +49,14 @@ export default function NFTsFloorPricesCard() {
   return (
     <Card className="w-full mx-auto">
       <CardHeader className="flex flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-        <CardTitle className="text-2xl font-bold text-primary">Floor Prices</CardTitle>
-        <MarketplaceSelector activeMarketplace={activeMarketplace} setActiveMarketplace={setActiveMarketplace} />
+        <CardTitle className="text-3xl pb-1 font-bold ">Floor Prices</CardTitle>
+        {activeTab !== 'area' && (
+          <MarketplaceSelector activeMarketplace={activeMarketplace} setActiveMarketplace={setActiveMarketplace} />
+        )}
       </CardHeader>
       <CardContent className='py-2 px-0 '>
         <div className="space-y-4">
-          <Tabs defaultValue="area" className="w-full">
+          <Tabs defaultValue="area" className="w-full" onValueChange={setActiveTab}>
             <div className="flex px-6 flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0 mb-4">
               <TabsList>
                 <TabsTrigger value="area">Area Chart</TabsTrigger>

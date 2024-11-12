@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { FloorPriceResponse, NFTHolderDistributionResponse, SimpleHashCollectionResponse } from '../types/types';
-import { formatFloorPriceData } from '../lib/utils';
 import { collectionIds } from '../lib/helpers/collectionIds';
 
 export async function fetchFloorPricesForAllRanges(collectionId: string, dateRanges: Array<{ id: string; startDate: string; endDate: string }>): Promise<Record<string, FloorPriceResponse | null>> {

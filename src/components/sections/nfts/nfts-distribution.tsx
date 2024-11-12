@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { PieChart as PieChartIcon, BarChart as BarChartIcon, BarChart3, TrendingUp } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
@@ -8,6 +8,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useNFTStore } from '../../../store/useNFTStore'
 import RadarChart from '../../charts/chart-radar'
 import RadialChart from '../../charts/chart-radial'
+import Spinner from '../../common/spinner'
 
 interface DistributionItem {
   name: string;
@@ -23,24 +24,27 @@ export default function NFTsDistributionCard() {
   const { distributionData, holdingPeriodData } = useNFTStore()
   const [activeChart, setActiveChart] = useState('pie')
 
-  const renderChart = () => {
-    if (!holdingPeriodData || !distributionData) {
-      return <p>Loading...</p>
-    }
-
-    const radialChartData = holdingPeriodData.data.distribution.map((item: DistributionItem) => ({
+  const radialChartData = useMemo(() => {
+    if (!holdingPeriodData) return []
+    return holdingPeriodData.data.distribution.map((item: DistributionItem) => ({
       label: item.name,
       value: parseFloat(item.proportion),
     }))
+  }, [holdingPeriodData])
 
-    const radarChartData = distributionData.distribution.map((item) => ({
+  const radarChartData = useMemo(() => {
+    if (!distributionData) return []
+    return distributionData.distribution.map((item) => ({
       label: item.name,
       value: parseFloat(item.proportion),
       color: 'hsl(var(--chart-1))',
     }))
+  }, [distributionData])
 
-    if (activeChart === 'pie') {
-      console.log('RadialChart Data:', radialChartData)
+
+  const renderChart = () => {
+    if (!holdingPeriodData || !distributionData) {
+      return <Spinner loadingText="Loading distribution data..." />
     }
 
     return (
@@ -66,8 +70,8 @@ export default function NFTsDistributionCard() {
             <BarChart3 className="h-8 w-8 text-purple-300" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-bold text-purple-100">Distribution Analysis</CardTitle>
-            <CardDescription className="text-purple-300">Token Holding Patterns</CardDescription>
+            <CardTitle className="text-2xl font-bold dark:text-purple-100">Distribution Analysis</CardTitle>
+            <CardDescription className="text-gray-500 dark:text-purple-300">Token Holding Patterns</CardDescription>
           </div>
         </div>
       </CardHeader>
@@ -97,7 +101,7 @@ export default function NFTsDistributionCard() {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-purple-400">
-          Showing total distribution for the last 6 months
+          Showing total distribution for the last 1 years +
         </div>
       </CardFooter>
     </Card>

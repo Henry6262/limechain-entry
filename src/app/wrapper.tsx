@@ -30,7 +30,6 @@ const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 attribute="class"
                 defaultTheme="light"
                 enableSystem
-                
               >
                 {children}
               </ThemeProvider>

@@ -19,11 +19,11 @@ interface BarChartInteractiveProps {
 const chartConfig = {
   blur: {
     label: "Blur",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--chart-2))",
   },
   opensea: {
     label: "OpenSea",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig
 

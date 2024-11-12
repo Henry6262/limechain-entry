@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import ActivityLogItem from './activity-log-item';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 4;
 
 const ActivityLogView: React.FC = () => {
   const activities = useProfileStore((state) => state.activities);
@@ -58,9 +58,6 @@ const ActivityLogView: React.FC = () => {
             <ChevronLeft className="h-4 w-4 mr-2" />
             Previous
           </Button>
-          <span className="text-sm text-muted-foreground">
-            Page {currentPage} of {totalPages}
-          </span>
           <Button
             variant="outline"
             size="sm"

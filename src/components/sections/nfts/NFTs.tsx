@@ -5,10 +5,11 @@ import Lottie from 'react-lottie';
 import { useNFTStore } from '../../../store/useNFTStore';
 import NFTsDistributionCard from './nfts-distribution';
 import NFTsFloorPricesCard from './nft-floor-prices';
-import NFTsInfoCard from './nfts-overview';
-import { fetchFloorPricesForAllRanges } from '../../../handlers/getNFTCollectionData';
+import NFTsInfoCard from './nfts-info';
+import { fetchFloorPricesForAllRanges } from '../../../lib/fetch-nfts-data';
 import { generateDateRangeParams } from '../../../lib/utils';
 import nftsAnimation from '../../../../public/lottie/nfts.json';
+import Spinner from '../../common/spinner';
 
 export default function NFTsPage() {
   const { collections, selectedCollection, loading, fetchCollections, fetchSelectedCollectionData, setSelectedCollection, setFloorPricesData } = useNFTStore();
@@ -57,7 +58,7 @@ export default function NFTsPage() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner fullPage={true} loadingText="Loading NFTs..." />;
   }
 
   return (
@@ -69,7 +70,7 @@ export default function NFTsPage() {
           width={100} 
           style={{ margin: 0 }}
         />
-        <h2 className="text-3xl text-tertiary font-bold pl-4">NFTs Overview</h2>
+        <h2 className="text-3xl text-white font-bold pl-4">NFTs Overview</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {selectedCollection && collections && (

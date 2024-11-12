@@ -75,7 +75,7 @@ export default function TaskItem({ task }: TaskItemProps) {
     <Card className={`relative w-full border-l-4 ${statusConfig[currentStatus].borderColor} transition-all duration-300 ${statusConfig[currentStatus].bgColor}`}>
       <Badge 
         variant="secondary" 
-        className={`absolute -top-3 left-4 ${task.taskType === 'quest' ? 'bg-purple-600 dark:bg-purple-400' : 'bg-blue-600 dark:bg-blue-400'} text-white z-10`}
+        className={`absolute -top-3 left-4 ${task.taskType === 'quest' ? 'bg-[#5f00b6] dark:bg-purple-400 text-white dark:text-black' : 'bg-blue-600 dark:bg-blue-400'}  z-10`}
       >
         {task.taskType === 'quest' ? (
           <Trophy className="mr-1" size={14} />
@@ -84,12 +84,12 @@ export default function TaskItem({ task }: TaskItemProps) {
         )}
         {task.taskType.charAt(0).toUpperCase() + task.taskType.slice(1)}
       </Badge>
-      <CardContent className="p-4 pt-6">
+      <CardContent className="p-4 pt-6 relative">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="font-semibold text-lg truncate pr-8 flex-grow text-gray-900 dark:text-gray-100">{task.title}</h3>
+          <h4 className="font-semibold text-lg truncate flex-grow text-gray-900 dark:text-gray-100">{task.title}</h4>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className={`${statusConfig[currentStatus].textColor} ${statusConfig[currentStatus].hoverBg} rounded-full p-1 transition-colors duration-200`}
+            className={`absolute top-2 right-2 ${statusConfig[currentStatus].textColor} ${statusConfig[currentStatus].hoverBg} rounded-full p-1 transition-colors duration-200`}
             aria-expanded={isExpanded}
             aria-label={isExpanded ? "Collapse task details" : "Expand task details"}
           >
@@ -121,18 +121,8 @@ export default function TaskItem({ task }: TaskItemProps) {
               transition={{ duration: 0.3 }}
             >
               <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">{task.description}</p>
-              {task.taskType === 'quest' ? (
-                <div className="space-y-2">
-    
-                  {currentStatus !== 'Completed' && (
-                    <Button 
-                      className={`w-full mt-2 ${statusConfig[currentStatus].bgColor} ${statusConfig[currentStatus].textColor} ${statusConfig[currentStatus].hoverBg} border border-current`}
-                    >
-                      {currentStatus === 'Not Started' ? 'Start Quest' : 'Continue Quest'}
-                    </Button>
-                  )}
-                </div>
-              ) : (
+              {task.taskType !== 'quest' && (
+              
                 <div className="flex justify-end space-x-2">
                   <TabButton
                     status={currentStatus === 'Completed' ? 'Not Started' : 'In Progress'}

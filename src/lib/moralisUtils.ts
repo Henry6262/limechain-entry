@@ -2,9 +2,7 @@ import Moralis from 'moralis';
 import { WalletData } from '@/types/types'; // Import the WalletData interface
 
 const MORALIS_API_KEY =
-  process.env.MORALIS_API_KEY ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImE2M2U1ZGJlLTBjMjAtNGY0ZS04Nzg5LWI3OWQ4OWU1YWZiYSIsIm9yZ0lkIjoiMzk3NjIwIiwidXNlcklkIjoiNDA4NTY5IiwidHlwZUlkIjoiYmQ4OGNmOWMtNTFiMS00YjdlLWI2NDItMjM4ZGIzMGZiNjMxIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MTkyMjUzNjcsImV4cCI6NDg3NDk4NTM2N30.4GdjthYU8TDkTE3KvEWxkDI7LTUHzq789MLQ9bTHXBw';
-
+  process.env.MORALIS_API_KEY 
 let isMoralisInitialized = false;
 
 export const initializeMoralis = async () => {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Mail, Edit2, Save } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { completeQuest } from '@/lib/handler-quest-completion';
 import { addActivity } from '@/lib/handler-user-activity';
+import * as Yup from 'yup';
 
 interface ProfileInfoProps {
   name: string;
@@ -16,22 +17,52 @@ interface ProfileInfoProps {
 
 export default function ProfileInfo({ name, email, setName, setEmail }: ProfileInfoProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const [currentName, setCurrentName] = useState(name);
+  const [currentEmail, setCurrentEmail] = useState(email);
+  const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
 
-  const handleSaveProfile = () => {
-    if (name && email) {
-      completeQuest(1);
-      addActivity({
-        type: 'auth',
-        action: 'update profile',
-        datetime: new Date().toISOString(),
-        details: `Name: ${name}, Email: ${email}`,
-      });
+  const profileSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+  });
+
+  useEffect(() => {
+    setCurrentName(name);
+    setCurrentEmail(email);
+  }, [name, email]);
+
+  const handleSaveProfile = async () => {
+    try {
+      await profileSchema.validate({ name: currentName, email: currentEmail }, { abortEarly: false });
+      setErrors({});
+
+      if (currentName !== name || currentEmail !== email) {
+        completeQuest(1);
+        addActivity({
+          type: 'auth',
+          action: 'update profile',
+          datetime: new Date().toISOString(),
+          details: `Name: ${currentName}, Email: ${currentEmail}`,
+        });
+        setName(currentName);
+        setEmail(currentEmail);
+      }
+      setIsEditing(false);
+    } catch (validationErrors) {
+      if (validationErrors instanceof Yup.ValidationError) {
+        const validationErrorsMap: Record<string, string> = {};
+        validationErrors.inner.forEach((error) => {
+          if (error.path) {
+            validationErrorsMap[error.path] = error.message;
+          }
+        });
+        setErrors(validationErrorsMap);
+      }
     }
-    setIsEditing(false);
   };
 
   return (
-    <div className="relative flex items-center space-x-4">
+    <div className="relative flex items-center space-x-4 overflow-scroll">
       <Avatar className="w-20 h-20">
         <AvatarImage src="https://github.com/shadcn.png" alt="Profile picture" />
         <AvatarFallback>JD</AvatarFallback>
@@ -48,16 +79,18 @@ export default function ProfileInfo({ name, email, setName, setEmail }: ProfileI
             >
               <div className="flex-1 space-y-2">
                 <Input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={currentName}
+                  onChange={(e) => setCurrentName(e.target.value)}
                   className="mb-2"
                   placeholder="Your name"
                 />
+                {errors.name && <p className="text-red-500">{errors.name}</p>}
                 <Input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={currentEmail}
+                  onChange={(e) => setCurrentEmail(e.target.value)}
                   placeholder="Your email"
                 />
+                {errors.email && <p className="text-red-500">{errors.email}</p>}
               </div>
               <div className="absolute top-0 right-0">
                 <Button

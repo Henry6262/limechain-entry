@@ -20,13 +20,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title, showClo
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-md"
+            className="bg-white dark:bg-[#180635] rounded-lg shadow-lg overflow-hidden w-full max-w-md"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0.9 }}
           >
             <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-              {title && <h2 className="text-lg font-semibold text-black">{title}</h2>}
+              {title && <h2 className="text-lg font-semibold text-black dark:text-white">{title}</h2>}
               {showCloseButton && (
                 <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
                   &times;
