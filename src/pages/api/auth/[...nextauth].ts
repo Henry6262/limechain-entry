@@ -23,20 +23,18 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       },
       async authorize(credentials) {
         try {
-          console.log("Received message:", credentials?.message);
-
           const siwe = new SiweMessage((credentials?.message || "{}"));
           const nextAuthUrl = new URL('http://localhost:3000');
 
-          console.log("Verifying SIWE message:", siwe);
+          const csrfToken = await getCsrfToken({ req: { headers: req.headers } });
+
+          console.log(csrfToken)
 
           const result = await siwe.verify({
             signature: credentials?.signature || "",
             domain: nextAuthUrl.host,
-            nonce: await getCsrfToken({ req }),
+            nonce: csrfToken,
           });
-
-          console.log("Verification result:", result);
 
           if (result.success) {
             return { id: siwe.address };
@@ -59,7 +57,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   return await NextAuth(req, res, {
     providers,
     session: { strategy: "jwt" },
-    secret:'somereallysecretsecret',
+    secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
       async session({ session, token }) {
         const extendedSession: ExtendedSession = session as ExtendedSession;

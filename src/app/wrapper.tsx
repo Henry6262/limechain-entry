@@ -21,8 +21,8 @@ const queryClient = new QueryClient({
 
 const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
+    <WagmiProvider config={config} >
     <SessionProvider refetchOnWindowFocus={false}>
-      <WagmiProvider config={config} >
         <QueryClientProvider client={queryClient}>
           <RainbowKitSiweNextAuthProvider>
             <RainbowKitProvider>
@@ -36,8 +36,8 @@ const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
         </QueryClientProvider>
-      </WagmiProvider>
     </SessionProvider>
+    </WagmiProvider>
   );
 };
 
