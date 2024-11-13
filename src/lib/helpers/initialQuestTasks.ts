@@ -27,9 +27,9 @@ export const initialQuestTasks: Task[] = [
     },
     {
       id: 4,
-      title: 'Complete 3 Quests',
-      description: 'Complete any 3 quests to earn bonus points.',
-      points: 100,
+      title: 'Use NFT Overview',
+      description: 'Fetch NFT collection data and select a collection other than the default.',
+      points: 45,
       status: 'Not Started',
       taskType: 'quest',
     },
