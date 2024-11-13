@@ -4,6 +4,7 @@
 
 This project was built with a focus on creating a user-friendly and engaging platform, focused on user experience and the creation of habits within the platform, awarding the user for interacting and using platform functionalities
 
+I created a full end to end platform with user authentication and persistance as a project submission. while ensuring I complete all of the requirements provided
 
 - **Watch at the video I provided, before starting the application**
 I do an overview on the platform, while explaining optimizations and interesting things I have come across, a more interactive way than just looking at my code (can do both).
@@ -44,7 +45,7 @@ I approached this project as if it were a public-facing application that I would
 
 - **Why Next.js?**
   - **Custom API Endpoints:** Securely handle requests without exposing private keys.
-  - **Personal Experience:** Built on my strong familiarity with Next.js for efficient, high-quality implementation.
+  - **Personal Experience:** Built on my strong familiarity with Next.js 
   
 ### UI Tech Stack
 
@@ -57,7 +58,7 @@ I approached this project as if it were a public-facing application that I would
 
 - **Zustand for Global State Management and Persistence:** Maintains user data and platform state across sessions, reducing the need for repeated requests (optimizations).
 - **Single Conditional Endpoint:** Simplifies the backend, reducing load times and enhancing navigation.
-- **NextAuth and SIWE Authentication:** Provides secure wallet-based sign-in with Ethereum, setting up for potential future enhancements (e.g., username and email).
+- **NextAuth and SIWE Authentication:** Provides secure wallet-based sign-in with Ethereum (Rainbowkit), 
 
 ### Data Fetching
 

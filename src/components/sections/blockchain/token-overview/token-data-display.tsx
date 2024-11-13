@@ -19,6 +19,7 @@ export function TokenDataDisplay({
   tokenData,
   displayBalance,
 }: TokenDataDisplayProps) {
+  
   return (
     <AnimatePresence mode="wait">
       <motion.div
