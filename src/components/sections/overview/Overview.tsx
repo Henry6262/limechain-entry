@@ -1,20 +1,27 @@
 'use client'
 
 import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import Lottie from 'react-lottie';
 import ProfileSection from './overview-profile';
 import OverviewTasks from './overview-tasks';
 import { useProfileStore } from '@/store/useProfileStore';
 import OverviewActivity from './overview-activity';
 import dashboardAnimation from '../../../../public/lottie/dashboard.json';
+import { ExtendedSession } from '@/pages/api/auth/[...nextauth]';
 
 export default function Overview() {
-  const { tasks, initializeTasks, initializeWalletData } = useProfileStore();
+  const { data: session } = useSession();
+  const { tasks, initializeTasks, setWalletAddress, checkAndClearDataOnWalletChange } = useProfileStore();
 
   useEffect(() => {
+    const extendedSession = session as ExtendedSession;
+    if (extendedSession?.address) {
+      checkAndClearDataOnWalletChange(extendedSession.address);
+      setWalletAddress(extendedSession.address);
+    }
     initializeTasks();
-    initializeWalletData(); 
-  }, []);
+  }, [session]);
 
   const lottieDefaultOptions = {
     loop: true,
@@ -26,7 +33,7 @@ export default function Overview() {
   };
 
   return (
-    <div className="min-h-screen text-white">
+    <div className="text-white">
       <div className="flex items-center mb-6">
         <Lottie 
           options={lottieDefaultOptions} 
