@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
-import { FloorPriceRequestParams, FloorPriceResponse } from '@/types/types';
+import { FloorPriceResponse } from '@/types/types';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { collectionId, granularity, startDate, endDate } = req.query;

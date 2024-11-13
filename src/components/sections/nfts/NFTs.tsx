@@ -10,6 +10,7 @@ import { fetchFloorPricesForAllRanges } from '../../../lib/fetch-nfts-data';
 import { generateDateRangeParams } from '../../../lib/utils';
 import nftsAnimation from '../../../../public/lottie/nfts.json';
 import Spinner from '../../common/spinner';
+import { completeQuest } from '@/lib/handler-quest-completion';
 
 export default function NFTsPage() {
   const { collections, selectedCollection, loading, fetchCollections, fetchSelectedCollectionData, setSelectedCollection, setFloorPricesData } = useNFTStore();
@@ -43,6 +44,7 @@ export default function NFTsPage() {
       const collection = collections.get(collectionId);
       if (collection) {
         setSelectedCollection(collection);
+        completeQuest(4);
       }
     }
   };

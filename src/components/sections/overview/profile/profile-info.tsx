@@ -62,7 +62,7 @@ export default function ProfileInfo({ name, email, setName, setEmail }: ProfileI
   };
 
   return (
-    <div className="relative flex items-center space-x-4 overflow-scroll">
+    <div className="relative flex items-center p-[5px] space-x-4 overflow-scroll">
       <Avatar className="w-20 h-20">
         <AvatarImage src="https://github.com/shadcn.png" alt="Profile picture" />
         <AvatarFallback>JD</AvatarFallback>
@@ -92,7 +92,7 @@ export default function ProfileInfo({ name, email, setName, setEmail }: ProfileI
                 />
                 {errors.email && <p className="text-red-500">{errors.email}</p>}
               </div>
-              <div className="absolute top-0 right-0">
+              <div className="absolute top-[5px] right-0">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -119,12 +119,13 @@ export default function ProfileInfo({ name, email, setName, setEmail }: ProfileI
                   <Mail className="mr-2 h-4 w-4" /> {email}
                 </p>
               </div>
-              <div className="absolute top-0 right-0">
+              <div className="absolute  top-[-12px] right-0">
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => setIsEditing(true)}
                   aria-label="Edit profile"
+                  className='!bg-transparent'
                 >
                   <Edit2 className="h-4 w-4" />
                 </Button>

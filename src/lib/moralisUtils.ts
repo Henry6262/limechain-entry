@@ -2,7 +2,7 @@ import Moralis from 'moralis';
 import { WalletData } from '@/types/types'; // Import the WalletData interface
 
 const MORALIS_API_KEY =
-  process.env.MORALIS_API_KEY 
+  process.env.MORALIS_API_KEY || ""
 let isMoralisInitialized = false;
 
 export const initializeMoralis = async () => {
