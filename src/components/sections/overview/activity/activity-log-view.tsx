@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ActivityLogItem from './activity-log-item';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import NoLogsAvailable from './actvity-log-no-logs-msg';
 
 const ITEMS_PER_PAGE = 4;
 
@@ -38,17 +39,21 @@ const ActivityLogView: React.FC = () => {
     <Card className="w-full bg-transparent border-none">
       <CardContent className="p-[0]">
         <div className="space-y-4">
-          {currentItems.map((item) => (
-            <ActivityLogItem
-              key={item.id}
-              item={item}
-              isExpanded={expandedItems.includes(item.id.toString())} // Convert to string
-              toggleExpansion={() => toggleItemExpansion(item.id.toString())} // Convert to string
-            />
-          ))}
+          {currentItems.length > 0 ? (
+            currentItems.map((item) => (
+              <ActivityLogItem
+                key={item.id}
+                item={item}
+                isExpanded={expandedItems.includes(item.id.toString())} // Convert to string
+                toggleExpansion={() => toggleItemExpansion(item.id.toString())} // Convert to string
+              />
+            ))
+          ) : (
+            <NoLogsAvailable/>
+          )}
         </div>
         <div className="flex justify-between items-center mt-4">
-          <Button
+          <Button 
             variant="outline"
             size="sm"
             onClick={handlePrevious}
