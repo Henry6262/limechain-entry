@@ -5,7 +5,11 @@
 This project was built with a focus on creating a user-friendly and engaging platform, optimized for public release, to demonstrate my technical skills, UI/UX focus, and commitment to quality.
 I implemented all task requirements along with additional features that would make this a viable candidate for a real public launch.
 
-Please look at the video I provided, I go into detail about my decisions, though process and implementation/optimization details I would not like you to miss.
+- **Watch at the video I provided, before starting the application**
+I do an overview on the platform, its functionalities,the reasoning behind them and my though process in general
+I go into detail about my decisions, though process and implementation/optimization details I would not like you to miss.
+## link to the video -> https://youtu.be/cJZmyFsZpe4
+
 
 ## Completed Tasks
 
@@ -23,7 +27,7 @@ Please look at the video I provided, I go into detail about my decisions, though
 
 ### Project Goals
 
-I approached this project as if it were a public-facing application that I would release for my own use. My goal was to maximize user experience, encourage platform adoption, and foster habit formation, while meeting all task requirements and going beyond with added features that elevate the platform. 
+I approached this project as if it were a public-facing application that I would release for my own use. My goal was to maximize user experience, encourage platform adoption, and foster habit formation, while meeting all task requirements and going beyond with added features that make this a platform aimed for public release. 
 
 - **User Experience and Interaction:** Developed a point-based quest system to incentivize users and created an interactive and branded UI to make the platform both functional and visually engaging.
   
@@ -64,18 +68,20 @@ I approached this project as if it were a public-facing application that I would
 
 ## Issues and Limitations
 
-1. **Single User/Wallet Sign-In Only:**
-   - The current version does not support multiple users or wallets .
-   - **TL;DR:** When a new wallet is connected, it inherits the previous session's data. Future updates would aim to support isolated profiles for multiple users and wallets.
-
 2. **GitHub Commit Structure and Strategy:**
    - Due to time constraints, I focused on implementation details and did not follow a structured commit strategy. In a collaborative environment, I would implement a more systematic approach.
+
+## AI USAGE
+
+- I used cursor and V0 extensively for the development of this application, 
+from development to UI mockup creations, while making changes and guiding it to proceed with correct implementation and optimizations I wanted to implement
+
 
 ## Motivation for Limechain
 
 From the beginning of my career, I aspired to work in the Web3 space, driven by a passion for decentralized technologies. I left my Web2 role at REWE (Billa) to transition into the NFT and blockchain sector, independently releasing applications and building a development team for Web3Me before its public release. This journey was motivated by a desire to create a portfolio strong enough to secure a role at Limechain or Nexo.
 
-This role is not just another job for me; it represents the culmination of years of dedication to blockchain and decentralized technology. I believe that my experience, skills, and commitment to innovation make me an ideal candidate for Limechain, and I am excited to contribute to building incredible, innovative Web3 applications alongside the Limechain team.
+This role is not just another job for me; it represents the culmination my dedication to blockchain and decentralized technology.I am excited to contribute to building incredible, innovative Web3 applications alongside the Limechain team and the web3 space.
 
 ---
 
