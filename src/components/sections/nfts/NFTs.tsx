@@ -25,8 +25,7 @@ export default function NFTsPage() {
 
   useEffect(() => {
     const fetchFloorPrices = async () => {
-      if (selectedCollection && selectedCollection !== prevSelectedCollectionRef.current) {
-        console.log('Selected collection changed:', selectedCollection.collection_id);
+      if (selectedCollection && selectedCollection.collection_id !== prevSelectedCollectionRef.current?.collection_id) {
         fetchSelectedCollectionData(selectedCollection.collection_id);
         prevSelectedCollectionRef.current = selectedCollection;
 
