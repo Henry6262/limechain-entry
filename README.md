@@ -2,18 +2,19 @@
 
 ## Overview
 
-This project was built with a focus on creating a user-friendly and engaging platform, optimized for public release, to demonstrate my technical skills, UI/UX focus, and commitment to quality.
-I implemented all task requirements along with additional features that would make this a viable candidate for a real public launch.
+This project was built with a focus on creating a user-friendly and engaging platform, focused on user experience and the creation of habits within the platform, awarding the user for interacting and using platform functionalities
+
 
 - **Watch at the video I provided, before starting the application**
-I do an overview on the platform, its functionalities,the reasoning behind them and my though process in general
-I go into detail about my decisions, though process and implementation/optimization details I would not like you to miss.
-## link to the video -> https://youtu.be/cJZmyFsZpe4
+I do an overview on the platform, while explaining optimizations and interesting things I have come across, a more interactive way than just looking at my code (can do both).
+
+I also cover some implementation/optimization details I would not like you to miss.
+## link to the video -> https://www.youtube.com/watch?v=jGR9PeXVTq4
 
 
 ## Completed Tasks
 
-- **All Task Requirements Met:** Completed every specified requirement across all levels.
+- **All Task Requirements Met:** Completed all the requirements across all levels
 
 - **Extra Features:**
   - Integrated NextAuth with SIWE (Sign in with Ethereum) using wallet signatures
@@ -74,18 +75,20 @@ I approached this project as if it were a public-facing application that I would
 ## AI USAGE
 
 - I used cursor and V0 extensively for the development of this application, 
-from development to UI mockup creations, while making changes and guiding it to proceed with correct implementation and optimizations I wanted to implement
+from integration and development to UI mockups and visual creations, while making changes and guiding it to proceed with correct implementation and optimizations I wanted to implement
+
+I did not provide a TXT file as the AI usage was extensive.
 
 
 ## Motivation for Limechain
 
-From the beginning of my career, I aspired to work in the Web3 space, driven by a passion for decentralized technologies. I left my Web2 role at REWE (Billa) to transition into the NFT and blockchain sector, independently releasing applications and building a development team for Web3Me before its public release. This journey was motivated by a desire to create a portfolio strong enough to secure a role at Limechain or Nexo.
+Being able to join a web3 company here in bulgaria, is something I have wanted since my journey in software development began, limechain and other bulgarian based web3 companies gave me the motivation to persue building something in the space by myself, to learn, create and release applications that will make and impact in the web3 space, and gained the needed knowledge to one day be become part of such company, hopefully this is the time
 
-This role is not just another job for me; it represents the culmination my dedication to blockchain and decentralized technology.I am excited to contribute to building incredible, innovative Web3 applications alongside the Limechain team and the web3 space.
+This role is not just another job for me; it represents the culmination of my dedication to blockchain and decentralized technology.
+I am willing to show and with this application, I hope I have proven how much I would like to to be part of this company, to build Web3 applications alongside the Limechain team and continue to grow and learn as a software engineer.
 
----
 
-Thank you for considering my work. I hope this project reflects the passion and commitment I will bring to Limechain.
+Thank you for considering my work. I hope this project reflects the passion and commitment I am willing to bring to the table.
 
 
 
