@@ -15,14 +15,17 @@ export default function ProfileSection() {
       <Card className="bg-card text-card-foreground">
         <CardContent className="pt-6" style={{ padding: '2.3rem 1.5rem 2.5rem 1.5rem'}}>
           <div className="flex flex-col space-y-6">
-            <ProfileInfo name={name} email={email} setName={setName} setEmail={setEmail} />
+            <ProfileInfo 
+              name={name || 'Default Name'} 
+              email={email || 'default@example.com'} 
+              setName={setName} 
+              setEmail={setEmail} 
+            />
             <TaskStats tasks={tasks} />
             <TotalPoints totalPoints={totalPoints} />
-
           </div>
         </CardContent>
       </Card>
     </div>
-
   );
 }

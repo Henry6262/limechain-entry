@@ -24,19 +24,8 @@ interface ProfileState {
   checkAndClearDataOnWalletChange: (newWalletAddress: string) => void;
 }
 
-const log = (config: any) => (set: any, get: any, api: any) =>
-  config(
-    (args: any) => {
-      console.log('Applying', args);
-      set(args);
-      console.log('New state', get());
-    },
-    get,
-    api
-  );
 
 export const useProfileStore = create<ProfileState>()(
-  log(
     persist(
       (set, get: () => ProfileState) => ({
         name: '',
@@ -46,8 +35,8 @@ export const useProfileStore = create<ProfileState>()(
         activities: [],
         totalPoints: 0,
         lastWalletAddress: null,
-        setName: (name: any) => set(() => ({ name })),
-        setEmail: (email: any) => set(() => ({ email })),
+        setName: (name: string) => set(() => ({ name })),
+        setEmail: (email: string) => set(() => ({ email })),
         setWalletAddress: (walletAddress: string) => {
           const lastWalletAddress = get().lastWalletAddress;
           if (lastWalletAddress && lastWalletAddress !== walletAddress) {
@@ -83,7 +72,7 @@ export const useProfileStore = create<ProfileState>()(
             return { tasks: updatedTasks };
           });
         },
-        addActivity: (activity: any) => set((state: { activities: any; }) => ({
+        addActivity: (activity: ActivityLogItem) => set((state: { activities: ActivityLogItem[]; }) => ({
           activities: [...state.activities, activity]
         })),
         initializeTasks: () => {
@@ -116,5 +105,4 @@ export const useProfileStore = create<ProfileState>()(
         name: 'profile-storage',
       }
     )
-  )
 );

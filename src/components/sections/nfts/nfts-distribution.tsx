@@ -43,8 +43,12 @@ export default function NFTsDistributionCard() {
 
 
   const renderChart = () => {
-    if (!holdingPeriodData || !distributionData) {
-      return <Spinner loadingText="Loading distribution data..." />
+    if (!holdingPeriodData || !distributionData ) {
+      return (
+      <div className='h-full content-center min-h-60 justify center'>
+        <Spinner loadingText="Loading distribution data..." />
+      </div>
+      )
     }
 
     return (
@@ -89,8 +93,8 @@ export default function NFTsDistributionCard() {
               </TabsTrigger>
             ))}
           </TabsList>
-          <div className="mt-6 border border-purple-800 rounded-lg p-4 bg-black ">
-            <AnimatePresence mode="wait">
+          <div className="mt-6 border min-h-72 h-full border-purple-800 rounded-lg p-4 bg-black ">
+            <AnimatePresence mode="wait" >
               {renderChart()}
             </AnimatePresence>
           </div>

@@ -109,9 +109,9 @@ export default function ProfileInfo({ name, email, setName, setEmail }: ProfileI
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex items-center space-x-2"
+              className="flex tems-center space-x-2"
             >
-              <div className="flex-1">
+              <div className="flex-1 gap-4 flex flex-col">
                 <p className="text-lg font-semibold flex items-center">
                   <User className="mr-2 h-4 w-4" /> {name}
                 </p>

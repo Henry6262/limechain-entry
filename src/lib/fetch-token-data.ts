@@ -1,5 +1,6 @@
 import { useToken, useBalance } from 'wagmi';
 import { formatEthereumAddress } from './utils';
+import { TokenData } from '@/types/types';
 
 interface UseTokenDataProps {
   tokenAddress: string;
@@ -10,7 +11,7 @@ interface UseTokenDataProps {
 export function useTokenData({ tokenAddress, chainId, walletAddress }: UseTokenDataProps) {
   const isNativeToken = tokenAddress === 'native';
 
-  const { data: tokenData, isError: tokenError, isLoading: tokenLoading } = useToken({
+  const { data: rawTokenData, isError: tokenError, isLoading: tokenLoading } = useToken({
     address: isNativeToken ? undefined : formatEthereumAddress(tokenAddress),
     chainId,
   });
@@ -20,6 +21,13 @@ export function useTokenData({ tokenAddress, chainId, walletAddress }: UseTokenD
     token: isNativeToken ? undefined : formatEthereumAddress(tokenAddress),
     chainId,
   });
+
+  const tokenData: TokenData | null = rawTokenData
+    ? {
+        name: rawTokenData.name || 'Unknown',
+        symbol: rawTokenData.symbol || 'N/A',
+      }
+    : null;
 
   return {
     tokenData,
