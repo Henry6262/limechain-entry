@@ -67,7 +67,7 @@ const TaskCreation: React.FC<TaskCreationProps> = ({ isOpen, onClose }) => {
             id="title"
             type="text"
             {...formik.getFieldProps('title')}
-            className={formik.touched.title && formik.errors.title ? "border-destructive" : ""}
+            className={`text-black dark:text-white ${formik.touched.title && formik.errors.title ? "border-destructive" : ""}`}
           />
           {formik.touched.title && formik.errors.title && (
             <p className="text-sm text-destructive">{formik.errors.title}</p>
@@ -78,7 +78,7 @@ const TaskCreation: React.FC<TaskCreationProps> = ({ isOpen, onClose }) => {
           <Textarea
             id="description"
             {...formik.getFieldProps('description')}
-            className={formik.touched.description && formik.errors.description ? "border-destructive" : ""}
+            className={`text-black dark:text-white ${formik.touched.description && formik.errors.description ? "border-destructive" : ""}`}
           />
           {formik.touched.description && formik.errors.description && (
             <p className="text-sm text-destructive">{formik.errors.description}</p>

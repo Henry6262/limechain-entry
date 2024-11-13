@@ -37,7 +37,6 @@ const ActivityLogView: React.FC = () => {
   return (
     <Card className="w-full bg-transparent border-none">
       <CardContent className="p-[0]">
-        <h2 className="text-2xl font-bold mb-4">Activity Log</h2>
         <div className="space-y-4">
           {currentItems.map((item) => (
             <ActivityLogItem
@@ -48,7 +47,7 @@ const ActivityLogView: React.FC = () => {
             />
           ))}
         </div>
-        <div className="flex justify-between items-center mt-6">
+        <div className="flex justify-between items-center mt-4">
           <Button
             variant="outline"
             size="sm"
@@ -56,7 +55,7 @@ const ActivityLogView: React.FC = () => {
             disabled={currentPage === 1}
           >
             <ChevronLeft className="h-4 w-4 mr-2" />
-            Previous
+            Prev
           </Button>
           <Button
             variant="outline"
