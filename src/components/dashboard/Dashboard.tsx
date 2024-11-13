@@ -30,7 +30,7 @@ export default function DashboardLayout() {
         return <OverviewSection />;
       case 'Blockchain':
         return <BlockchainSection />;
-      case 'Stats':
+      case 'NFTs':
         return <NFTSection />;
       default:
         return <BlockchainSection />;

@@ -18,7 +18,7 @@ import ThemeToggle from '@/components/common/theme-toggle';
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Overview', href: '#' },
-  { icon: BarChart2, label: 'Stats', href: '#' },
+  { icon: BarChart2, label: 'NFTs', href: '#' },
   { icon: Wallet, label: 'Blockchain', href: '#' },
 ];
 

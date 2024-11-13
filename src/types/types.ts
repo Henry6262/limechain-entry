@@ -134,3 +134,8 @@ export interface WalletData {
     total: string;
   };
 }
+
+export interface TokenData {
+  name: string;
+  symbol: string;
+}

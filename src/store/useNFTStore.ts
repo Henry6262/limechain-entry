@@ -6,7 +6,7 @@ interface NFTState {
   collections: Map<string, SimpleHashCollection> | null;
   selectedCollection: SimpleHashCollection | null;
   distributionData: NFTHolderDistributionResponse['data'] | null;
-  holdingPeriodData: any; // Define the type based on your API response
+  holdingPeriodData: any; //eslint-disable-line 
   floorPricesData: Record<string, FloorPriceResponse | null> | null;
   loading: boolean;
   fetchCollections: () => Promise<void>;

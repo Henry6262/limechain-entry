@@ -3,6 +3,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { supportedChains } from '@/lib/helpers/tokenAssetData';
+import Image from 'next/image';
 
 interface TokenAddressInputProps {
   tokenAddress: string;
@@ -36,7 +37,7 @@ export function TokenAddressInput({
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="outline" className="w-16 h-12 p-0 bg-gray-800 border-gray-700 hover:bg-gray-700 hover:border-purple-500 transition-all duration-300">
-            <img src={selectedChain.icon} alt={selectedChain.name} className="w-8 h-8" />
+            <Image src={selectedChain.icon} alt={selectedChain.name} width={32} height={32} />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-48 p-0 border-gray-700">
@@ -47,7 +48,7 @@ export function TokenAddressInput({
               className="w-full justify-start px-3 py-2 hover:bg-gray-700"
               onClick={() => handleChainChange(chain)}
             >
-              <img src={chain.icon} alt={chain.name} className="w-6 h-6 mr-3" />
+              <Image src={chain.icon} alt={chain.name} width={24} height={24} className="mr-3" />
               {chain.name}
             </Button>
           ))}

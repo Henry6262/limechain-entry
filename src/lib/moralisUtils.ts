@@ -12,8 +12,12 @@ export const initializeMoralis = async () => {
         await Moralis.start({ apiKey: MORALIS_API_KEY });
         isMoralisInitialized = true;
       }
-    } catch (error: any) {
-      console.error('Error initializing Moralis:', error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Error initializing Moralis:', error.message);
+      } else {
+        console.error('Unknown error initializing Moralis');
+      }
       throw error;
     }
   }
@@ -34,8 +38,12 @@ export const getWalletStats = async (address: string): Promise<WalletData> => {
 
     // Assuming response.raw contains the data in the desired format
     return response.raw as WalletData;
-  } catch (error: any) {
-    console.error('Error fetching wallet stats from Moralis:', error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error fetching wallet stats from Moralis:', error.message);
+    } else {
+      console.error('Unknown error fetching wallet stats from Moralis');
+    }
     throw error;
   }
 };

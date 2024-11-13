@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Label } from '@/components/ui/label';
 import { supportedChains } from '@/lib/helpers/tokenAssetData';
+import Image from 'next/image';
 
 interface TokenQuickSelectProps {
   selectedChain: typeof supportedChains[0];
@@ -36,7 +37,7 @@ export function TokenQuickSelect({ selectedChain, setTokenAddress, setHasProcess
                   setHasProcessedData(false);
                 }}
               >
-                <img src={token.image} alt={token.symbol} className="w-14 h-14 rounded-full" />
+                <Image src={token.image} alt={token.symbol} width={56} height={56} className="rounded-full" />
               </Button>
             </motion.div>
           ))}

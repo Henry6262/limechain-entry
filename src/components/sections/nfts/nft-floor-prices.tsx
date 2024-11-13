@@ -6,7 +6,6 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { useNFTStore } from '../../../store/useNFTStore'
 import { formatFloorPriceData } from '@/lib/utils'
-import { format, subDays, subMonths } from 'date-fns'
 import CombinedAreaChart from '../../charts/chart-combined-area'
 import BarChart from '../../charts/chart-bar'
 import { dateRanges } from '../../../types/types'

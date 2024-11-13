@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts"
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import {
   ChartConfig,
   ChartContainer,
@@ -29,7 +29,6 @@ const chartConfig = {
 export default function CombinedAreaChart({ data }: CombinedAreaChartProps) {
   return (
     <ChartContainer config={chartConfig} className="h-[300px] w-full">
-      <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="fillBlur" x1="0" y1="0" x2="0" y2="1">
@@ -87,7 +86,6 @@ export default function CombinedAreaChart({ data }: CombinedAreaChartProps) {
           />
           <ChartLegend content={<ChartLegendContent />} />
         </AreaChart>
-      </ResponsiveContainer>
     </ChartContainer>
   )
 }

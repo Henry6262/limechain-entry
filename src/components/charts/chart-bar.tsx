@@ -1,15 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { useState } from "react"
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts"
+
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { Button } from "@/components/ui/button"
 
 interface BarChartInteractiveProps {
   data: Array<{ date: string; blur: number | null; opensea: number | null }>
@@ -32,7 +31,6 @@ export default function BarChartInteractive({ data, activeMarketplace }: BarChar
   return (
     <div className="space-y-4">
       <ChartContainer config={chartConfig} className="h-[300px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis
@@ -68,7 +66,6 @@ export default function BarChartInteractive({ data, activeMarketplace }: BarChar
             />
             <Bar dataKey={activeMarketplace} fill={`var(--color-${activeMarketplace})`} radius={[4, 4, 0, 0]} />
           </BarChart>
-        </ResponsiveContainer>
       </ChartContainer>
     </div>
   )

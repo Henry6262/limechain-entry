@@ -2,6 +2,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Twitter, Instagram, ExternalLink, MessageCircle } from 'lucide-react';
 import { SimpleHashCollection } from '../../../../types/types';
+import Image from 'next/image';
 
 interface NFTsInfoCardHeaderProps {
   collection: SimpleHashCollection;
@@ -10,9 +11,9 @@ interface NFTsInfoCardHeaderProps {
 export default function NFTsInfoCardHeader({ collection }: NFTsInfoCardHeaderProps) {
   return (
     <div className="relative p-0">
-      <img src={collection.banner_image_url} alt={`${collection.name} banner`} className="w-full h-48 object-cover" />
+      <Image src={collection.banner_image_url} alt={`${collection.name} banner`} width={800} height={192} className="w-full h-48 object-cover" />
       <Avatar className="absolute bottom-0 left-4 transform translate-y-1/2 w-24 h-24 border-4 border-primary">
-        <img src={collection.image_url} alt={collection.name} className="object-cover" />
+        <Image src={collection.image_url} alt={collection.name} width={96} height={96} className="object-cover" />
       </Avatar>
       <div className="absolute bottom-0 right-4 transform translate-y-1/2 flex gap-2">
         {collection.twitter_username && (

@@ -21,7 +21,7 @@ export default function Overview() {
       setWalletAddress(extendedSession.address);
     }
     initializeTasks();
-  }, [session]);
+  }, [session, setWalletAddress, initializeTasks, checkAndClearDataOnWalletChange]);
 
   const lottieDefaultOptions = {
     loop: true,
