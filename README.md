@@ -10,6 +10,7 @@ I created a full end to end platform with user authentication and persistance as
 I do an overview on the platform, while explaining optimizations and interesting things I have come across, a more interactive way than just looking at my code (can do both).
 
 I also cover some implementation/optimization details I would not like you to miss.
+have in mind my bulgarian is good but is my 4th language and I do make some mistakes while speaking
 ## link to the video -> https://www.youtube.com/watch?v=jGR9PeXVTq4
 
 
