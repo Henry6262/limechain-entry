@@ -2,8 +2,6 @@ import { TokenData } from '@/types/types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertCircle, Loader2 } from 'lucide-react';
 
-
-
 interface TokenDataDisplayProps {
   tokenLoading: boolean;
   balanceLoading: boolean;

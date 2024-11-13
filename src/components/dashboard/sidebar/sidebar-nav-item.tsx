@@ -14,7 +14,7 @@ interface NavItemProps {
 export function SidebarNavItem({ icon: Icon, label, href, onClick }: NavItemProps) {
   return (
     <TooltipProvider>
-      <Tooltip delayDuration={300}>
+      <Tooltip delayDuration={150}>
         <TooltipTrigger asChild>
           <motion.a
             href={href}
